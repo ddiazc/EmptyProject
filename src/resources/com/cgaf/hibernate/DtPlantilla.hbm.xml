@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.DtPlantilla" table="DT_PLANTILLA">
+        <composite-id name="id" class="com.cgaf.model.DtPlantillaId">
+            <key-property name="idPlantilla" type="short">
+                <column name="ID_PLANTILLA" precision="4" scale="0" />
+            </key-property>
+            <key-property name="valRen" type="java.lang.Integer">
+                <column name="VAL_REN" precision="5" scale="0" />
+            </key-property>
+            <key-property name="valCol" type="java.lang.Integer">
+                <column name="VAL_COL" precision="5" scale="0" />
+            </key-property>
+            <key-property name="nomCelcol" type="string">
+                <column name="NOM_CELCOL" length="80" />
+            </key-property>
+            <key-property name="valTipo" type="string">
+                <column name="VAL_TIPO" length="7" />
+            </key-property>
+            <key-property name="valCriterio" type="string">
+                <column name="VAL_CRITERIO" length="100" />
+            </key-property>
+            <key-property name="valHoja" type="java.lang.Byte">
+                <column name="VAL_HOJA" precision="2" scale="0" />
+            </key-property>
+            <key-property name="tipoDato" type="string">
+                <column name="TIPO_DATO" length="20" />
+            </key-property>
+            <key-property name="nomHoja" type="string">
+                <column name="NOM_HOJA" length="100" />
+            </key-property>
+            <key-property name="idDtPlantilla" type="big_decimal">
+                <column name="ID_DT_PLANTILLA" precision="22" scale="0" />
+            </key-property>
+            <key-property name="titulo" type="string">
+                <column name="TITULO" length="100" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.MtPlantilla" table="MT_PLANTILLA">
+        <id name="idPlantilla" type="short">
+            <column name="ID_PLANTILLA" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="idPee" type="string">
+            <column name="ID_PEE" length="3" />
+        </property>
+        <property name="idTipoplantilla" type="java.lang.Byte">
+            <column name="ID_TIPOPLANTILLA" precision="2" scale="0" />
+        </property>
+        <property name="descPlantilla" type="string">
+            <column name="DESC_PLANTILLA" length="200" />
+        </property>
+        <property name="tipoLectura" type="big_decimal">
+            <column name="TIPO_LECTURA" precision="22" scale="0" />
+        </property>
+        <property name="descPlantillacorta" type="string">
+            <column name="DESC_PLANTILLACORTA" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

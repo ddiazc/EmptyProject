@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>CGAF</title>
+            </f:facet>
+            
+            <style>
+				.loginGrid tr, .loginGrid td {
+					border: hidden;
+					border-style: hidden !important;
+				}
+			</style>
+            
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+                
+                <p:layoutUnit style="border: none;" position="north" size="auto" resizable="false" closable="true" collapsible="false">
+                    <!--<p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>-->
+                </p:layoutUnit>
+                
+                <p:layoutUnit style="border: none;" position="south" size="auto" resizable="false" closable="true" collapsible="false">
+                    <!--<p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>-->
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="loginPanel">
+                    	<p:panel header="login" style="width: 350px; height: 275px; position: absolute;
+                    			 top: 50%; left: 50%; margin-top: -187.5px; margin-left: -225px; 
+                    			 background:  none; border: none;">
+                    		<p:panelGrid style="margin-bottom:10px; width: auto;" styleClass="loginGrid">
+                    			<p:row style="width: auto;">
+                    				<p:column style="width: auto;">
+                            			<h:outputLabel for="username" value="Username:" />
+                            		</p:column>
+                            		<p:column style="width: auto">
+                                		<p:inputText id="username" value="#{loginBean.username}" required="true" 
+                                					 requiredMessage="Se requiere usuario." label="username" />
+                                		<p:watermark for="username" value="Usuario" id="watermark_user" />
+                                	</p:column>
+                                </p:row>
+                                <p:row>
+                                	<p:column style="width: auto">
+                                		<h:outputLabel for="password" value="Password:" />
+                                	</p:column>
+                                	<p:column style="width: auto">
+                                		<p:password id="password" value="#{loginBean.password}" required="true" 
+                                					requiredMessage="Se requiere contraseña." label="password" feedback="false" />
+                                		<p:watermark for="password" value="Contraseña" id="watermark_pass" />
+                                	</p:column>
+                                </p:row>
+                                <p:row>
+                                	<p:column colspan="2" style="width: auto">
+                                		<p:commandButton value="Login" update="messages"
+                                        	             action="#{loginBean.authenticate()}"/>
+                                	</p:column>
+                                </p:row>
+                                <p:row>
+                                	<p:column colspan="2" style="width: auto">
+                                		<p:messages id="messages" showSummary="false" showDetail="true" 
+                                					autoUpdate="false" closable="true" />
+                                	</p:column>
+                                </p:row>
+                            </p:panelGrid>
+                    	</p:panel>
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

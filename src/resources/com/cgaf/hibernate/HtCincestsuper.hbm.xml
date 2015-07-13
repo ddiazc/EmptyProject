@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.HtCincestsuper" table="HT_CINCESTSUPER">
+        <id name="idPee" type="short">
+            <column name="ID_PEE" precision="3" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ctVariable" class="com.cgaf.model.CtVariable" fetch="select">
+            <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechPeriodo" type="date">
+            <column name="FECH_PERIODO" length="7" not-null="true" />
+        </property>
+        <property name="numPeriodo" type="long">
+            <column name="NUM_PERIODO" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="valValor" type="java.lang.Double">
+            <column name="VAL_VALOR" precision="126" scale="0" />
+        </property>
+        <property name="idVersion" type="java.lang.Long">
+            <column name="ID_VERSION" precision="10" scale="0" />
+        </property>
+        <property name="idEstatus" type="big_decimal">
+            <column name="ID_ESTATUS" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

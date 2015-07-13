@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.CtUsuarios" table="CT_USUARIOS">
+        <id name="idUsuario" type="big_decimal">
+            <column name="ID_USUARIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ctRoles" class="com.cgaf.model.CtRoles" fetch="select">
+            <column name="ID_ROL" precision="22" scale="0" not-null="true">
+                <comment>Identificador del rol al que pertenece el usuario.</comment>
+            </column>
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO" length="60" not-null="true">
+                <comment>Nombre del usuario.</comment>
+            </column>
+        </property>
+        <property name="apellidopUsuario" type="string">
+            <column name="APELLIDOP_USUARIO" length="60" not-null="true">
+                <comment>Apellido paterno del usuario.</comment>
+            </column>
+        </property>
+        <property name="apellidomUsuario" type="string">
+            <column name="APELLIDOM_USUARIO" length="60">
+                <comment>Apellido materno del usuario.</comment>
+            </column>
+        </property>
+        <property name="emailUsuario" type="string">
+            <column name="EMAIL_USUARIO" length="45">
+                <comment>Correo electronico del usuario.</comment>
+            </column>
+        </property>
+        <property name="fechaAlta" type="serializable">
+            <column name="FECHA_ALTA" not-null="true">
+                <comment>Fecha de alta del usuario.</comment>
+            </column>
+        </property>
+        <property name="fechaUltmon" type="serializable">
+            <column name="FECHA_ULTMON">
+                <comment>Fecha de la ultima modificacion que sufrio el usuario.</comment>
+            </column>
+        </property>
+        <property name="ultimoUsuario" type="string">
+            <column name="ULTIMO_USUARIO" length="60">
+                <comment>Nombre del ultimo usuario que modifico el registro.</comment>
+            </column>
+        </property>
+        <property name="activo" type="boolean">
+            <column name="ACTIVO" precision="1" scale="0" not-null="true">
+                <comment>Bandera que indica si el usuario se encuentra activo.</comment>
+            </column>
+        </property>
+        <set name="DHasheses" table="D_HASHES" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_USUARIO" precision="22" scale="0" not-null="true">
+                    <comment>Identificador del usuario due&#195;&#177;o del hash.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.cgaf.model.DHashes" />
+        </set>
+    </class>
+</hibernate-mapping>

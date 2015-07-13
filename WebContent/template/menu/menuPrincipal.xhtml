@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+        	<h:outputStylesheet library="css" name="default.css"/>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>CGAF - Menú</title>
+            </f:facet>
+            <style>
+				.panelContent {
+					border: none;
+				}
+				.contentGrid tr, .contentGrid td {
+					border: hidden;
+					border-style: hidden !important;
+				}
+			</style>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit style="border: none;" position="north" size="auto" resizable="false" closable="true" collapsible="false">
+                    <!--<p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>-->
+                </p:layoutUnit>
+
+                <p:layoutUnit style="border: none;" position="south" size="auto" resizable="false" closable="true" collapsible="false">
+                    <!--<p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>-->
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="content">
+                    	<p:panel id="menuBar" styleClass="panelContent">
+	                        <p:menubar>
+	                            <p:submenu label="Operación" icon="ui-icon-newwin">
+	                                <p:menuitem value="Originales" actionListener="#{menuP.reporteOriginales}"
+	                                			update="queryGrid reportePanel" icon="ui-icon-search"/>
+	                                <p:menuitem value="Corregidos" icon="ui-icon-search"/>
+	                                <p:menuitem value="Ambos" icon="ui-icon-search"/>
+	                            </p:submenu>
+	                            <p:submenu label="Facturación" icon="ui-icon-folder-collapsed"></p:submenu>
+	                            <p:submenu label="Datos Básicos" icon="ui-icon-folder-collapsed"></p:submenu>
+	                            <p:submenu label="Configuración del sistema" icon="ui-icon-wrench"></p:submenu>
+	                            <p:submenu label="Salir" icon="ui-icon-person">
+	                            	<p:menuitem value="Cerrar Sesión" action="#{menuP.logout()}" icon="ui-icon-close"/>
+	                            </p:submenu>
+	                        </p:menubar>
+                        </p:panel>
+                        <p:panel id="queryGrid" styleClass="panelContent">
+                        	<p:panelGrid rendered="#{menuP.renderedOriginales}" style="margin-bottom:10px; width: auto;" styleClass="contentGrid">
+                                <p:row>
+                                	<p:column style="width: auto;" colspan="2">
+                                		<p:panel id="tiposGrid" header="Tipos">
+	                                		<p:selectManyCheckbox id="gridTipo" value="#{menuP.selectedTipos}" layout="grid" columns="#{menuP.columnTipos}">
+	                                			<f:selectItems value="#{menuP.tipos}" var="tipo" itemLabel="#{tipo.descTipo}" itemValue="#{tipo.idTipo}"/>
+	                                			<p:ajax update="tiposGrid variablesGrid messages" listener="#{menuP.eligeTipo}" />
+	                                		</p:selectManyCheckbox>
+                                		</p:panel>
+                        			</p:column>
+                        			<p:column style="width: auto;" colspan="2">
+                        				<p:scrollPanel id="variablesGrid" mode="native" style="width:350px; height:200px">
+	                        				<p:panel header="Variables" styleClass="panelContent">
+		                                		<p:selectManyCheckbox id="gridVar" value="#{menuP.selectedVars}" layout="grid" columns="1">
+		                                			<f:selectItems value="#{menuP.variables}" var="vars" itemLabel="#{vars.descVariable}" itemValue="#{vars.idVariable}" />
+		                                			<p:ajax update="variablesGrid messages" listener="#{menuP.eligeVar}" />
+		                                		</p:selectManyCheckbox>
+		                                	</p:panel>
+                                		</p:scrollPanel>
+                        			</p:column>
+                        			<p:column style="width: auto;">
+                    					<h:outputText value="Fecha inicio"/>
+                            		</p:column>
+                    				<p:column style="width: auto;">
+                    					<p:calendar id="restrictedInicio" value="#{menuP.fechaInicio}"/>
+                            		</p:column>
+                            		<p:column style="width: auto">
+                                		<h:outputText value="Al"/>
+                                	</p:column>
+                                	<p:column style="width: auto;">
+                    					<p:calendar id="restrictedFin" value="#{menuP.fechaFin}"/>
+                            		</p:column>
+                            		<p:column style="width: auto;">
+                            			<p:commandButton actionListener="#{menuP.getReporte}" update="messagePanel reportePanel" icon="ui-icon-search" value="Buscar"/>
+                            		</p:column>
+                            		<p:column style="width: auto;">
+                            			<p:commandButton actionListener="#{menuP.limpiar}" update="messagePanel queryGrid reportePanel" icon=" ui-icon-trash" value="Limpiar"/>
+                            		</p:column>
+                                </p:row>
+                        	</p:panelGrid>
+                        </p:panel>
+                        <p:panel id="messagePanel" styleClass="panelContent">
+                        	<p:messages id="messages" showSummary="false" showDetail="true" 
+                                		autoUpdate="false" closable="true" />
+                        </p:panel>
+                        <p:panel id="reportePanel" styleClass="panelContent">
+                        	<p:scrollPanel style="width:100%"  mode="native" rendered="#{menuP.renderedRecords}">
+                        		<p:dataTable id="records" var="list" value="#{menuP.listOfRecords}" tableStyle="width: auto" paginator="true" 
+				    						 paginatorPosition="bottom" rows="20"
+				        					 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
+				        					 rowsPerPageTemplate="20,40,60,80,100"
+				        					 style="font-size: 9px; aling: center"
+				        					 sortBy="#{listOfRecords.id}" sortOrder="descending" emptyMessage="No se encontraron registros con los criterios seleccionados.">
+				        			<f:facet name="header">Previsualización de la información</f:facet>
+				        			<f:facet name="{Exporters}">
+				        				<h:commandLink>
+					        				<p:graphicImage value="/resources/primefaces/images/excel.png"/>
+					      					<p:dataExporter type="xls" target="records" fileName="#{menuP.fileName}" postProcessor="#{menuP.postProcessXLS}" />  
+					        			</h:commandLink>
+				        			</f:facet>
+				        			<p:column rendered="true" headerText="ID" sortBy="#{list.id}" style="width: auto">
+				        				<h:outputText value="#{list.id}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Fecha de Inicio del Periodo" sortBy="#{list.fechaIni}" style="width: auto">
+				        				<h:outputText value="#{list.fechaIni}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Fecha de Fin del Periodo" sortBy="#{list.fechaFin}" style="width: auto">
+				        				<h:outputText value="#{list.fechaFin}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Porcentaje de Carga" sortBy="#{list.carga}" style="width: auto">
+				        				<h:outputText value="#{list.carga}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Consumo Térmico Unitario Garantizado con gas" sortBy="#{list.ctungg}" style="width: auto">
+				        				<h:outputText value="#{list.ctungg}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Consumo Térmico en Operacion en Vacío" sortBy="#{list.ctovg}" style="width: auto">
+				        				<h:outputText value="#{list.ctovg}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Temperatura Atmosférica" sortBy="#{list.tatm}" style="width: auto">
+				        				<h:outputText value="#{list.tatm}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Humedad Atmosférica" sortBy="#{list.hatm}" style="width: auto">
+				        				<h:outputText value="#{list.hatm}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Presion Atmosferica" sortBy="#{list.patm}" style="width: auto">
+				        				<h:outputText value="#{list.patm}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Capacidad Declarada Disponible a condiciones reales" sortBy="#{list.cDDreal}" style="width: auto">
+				        				<h:outputText value="#{list.cDDreal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Potencia Eléctrica a condiciones de verano" sortBy="#{list.potenciaV}" style="width: auto">
+				        				<h:outputText value="#{list.potenciaV}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Potencia Eléctrica a condiciones reales" sortBy="#{list.potencia}" style="width: auto">
+				        				<h:outputText value="#{list.potencia}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Eléctrica Total" sortBy="#{list.enTotal}" style="width: auto">
+				        				<h:outputText value="#{list.enTotal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Eléctrica Cincominutal" sortBy="#{list.enCinco}" style="width: auto">
+				        				<h:outputText value="#{list.enCinco}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 1 Principal Entrando" sortBy="#{list.enLin1PrinEnt}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1PrinEnt}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 1 Principal Saliendo" sortBy="#{list.enLin1PrinSal}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1PrinSal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="EnergÍa Medidor Eléctrico: Línea 1 Respaldo Entrando" sortBy="#{list.enLin1RespEnt}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1RespEnt}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 1 Respaldo Saliendo" sortBy="#{list.enLin1RespSal}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1RespSal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 2 Principal Entrando" sortBy="#{list.enLin2PrinEnt}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2PrinEnt}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 2 Principal Saliendo" sortBy="#{list.enLin2PrinSal}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2PrinSal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Entrando" sortBy="#{list.enLin2RespEnt}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2RespEnt}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Saliendo" sortBy="#{list.enLin2RespSal}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2RespSal}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgas}" style="width: auto">
+				        				<h:outputText value="#{list.pCIgas}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgas}" style="width: auto">
+				        				<h:outputText value="#{list.pCSgas}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Densidad Relativa del Gas en la Central" sortBy="#{list.densGas}" style="width: auto">
+				        				<h:outputText value="#{list.densGas}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Factor de potencia de la central" sortBy="#{list.factPot}" style="width: auto">
+				        				<h:outputText value="#{list.factPot}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Presión de vacío en el condensador" sortBy="#{list.presCond}" style="width: auto">
+				        				<h:outputText value="#{list.presCond}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 1" sortBy="#{list.enLin1PrinReacQ1}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1PrinReacQ1}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 4" sortBy="#{list.enLin1PrinReacQ4}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1PrinReacQ4}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 1" sortBy="#{list.enLin1RespReacQ1}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1RespReacQ1}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 4" sortBy="#{list.enLin1RespReacQ4}" style="width: auto">
+				        				<h:outputText value="#{list.enLin1RespReacQ4}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 1" sortBy="#{list.enLin2PrinReacQ1}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2PrinReacQ1}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 4" sortBy="#{list.enLin2PrinReacQ4}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2PrinReacQ4}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 1" sortBy="#{list.enLin2RespReacQ1}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2RespReacQ1}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 4" sortBy="#{list.enLin2RespReacQ4}" style="width: auto">
+				        				<h:outputText value="#{list.enLin2RespReacQ4}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgasM3}" style="width: auto">
+				        				<h:outputText value="#{list.pCIgasM3}" style="width: auto" />
+				        			</p:column>
+				        			<p:column rendered="true" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgasM3}" style="width: auto">
+				        				<h:outputText value="#{list.pCSgasM3}" style="width: auto" />
+				        			</p:column>
+				        		</p:dataTable>
+                        	</p:scrollPanel>
+                        </p:panel>
+                    </h:form>
+                </p:layoutUnit>
+                
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

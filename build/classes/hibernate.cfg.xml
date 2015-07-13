@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">MasterSigafV2</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@201.157.49.17:1521:SIGAFV2</property>
+        <property name="hibernate.connection.username">SIGAFV2</property>
+        <property name="hibernate.default_schema">SIGAFV2</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+    </session-factory>
+</hibernate-configuration>

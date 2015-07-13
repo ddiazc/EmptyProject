@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.DHashes" table="D_HASHES">
+        <id name="idHash" type="big_decimal">
+            <column name="ID_HASH" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ctUsuarios" class="com.cgaf.model.CtUsuarios" fetch="select">
+            <column name="ID_USUARIO" precision="22" scale="0" not-null="true">
+                <comment>Identificador del usuario due&#195;&#177;o del hash.</comment>
+            </column>
+        </many-to-one>
+        <property name="hash" type="blob">
+            <column name="HASH" not-null="true">
+                <comment>Hash del usuario.</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

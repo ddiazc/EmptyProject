@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.CtVariable" table="CT_VARIABLE">
+        <id name="idVariable" type="int">
+            <column name="ID_VARIABLE" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descVariable" type="string">
+            <column name="DESC_VARIABLE" length="400" not-null="true" />
+        </property>
+        <property name="descUnidad" type="string">
+            <column name="DESC_UNIDAD" length="100" />
+        </property>
+        <property name="descNemonico" type="string">
+            <column name="DESC_NEMONICO" length="90" />
+        </property>
+        <set name="htCinccromatografos" table="HT_CINCCROMATOGRAFO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCinccromatografo" />
+        </set>
+        <set name="htCincestsupers" table="HT_CINCESTSUPER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCincestsuper" />
+        </set>
+        <set name="htCincenergias" table="HT_CINCENERGIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCincenergia" />
+        </set>
+        <set name="htCincderivadas" table="HT_CINCDERIVADA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCincderivada" />
+        </set>
+        <set name="htCincambientals" table="HT_CINCAMBIENTAL" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCincambiental" />
+        </set>
+        <set name="ctConceptos" table="CT_CONCEPTO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.CtConcepto" />
+        </set>
+        <set name="htCincenergiaRespaldos" table="HT_CINCENERGIA_RESPALDO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.HtCincenergiaRespaldo" />
+        </set>
+    </class>
+</hibernate-mapping>

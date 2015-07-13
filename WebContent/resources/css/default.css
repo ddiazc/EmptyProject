@@ -1,0 +1,22 @@
+/*.ui-menubar {
+    background-image:none !important;
+    background-color:#779ECB !important;    
+}
+
+.ui-menuitem-text {
+	color:black !important;
+	font-family:Arial;
+}
+
+.centeredMenuBar.ui-menubar {
+    text-align: center;
+}
+
+.centeredMenuBar .ui-menu-list {
+    display: inline-block;
+}
+
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
+}*/

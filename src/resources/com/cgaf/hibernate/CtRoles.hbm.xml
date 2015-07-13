@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.CtRoles" table="CT_ROLES">
+        <id name="idRol" type="big_decimal">
+            <column name="ID_ROL" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcionRol" type="string">
+            <column name="DESCRIPCION_ROL" length="60" not-null="true">
+                <comment>Descripcion del rol de usuario.</comment>
+            </column>
+        </property>
+        <property name="fechaAlta" type="serializable">
+            <column name="FECHA_ALTA" not-null="true">
+                <comment>Fecha de alta del rol.</comment>
+            </column>
+        </property>
+        <property name="fechaUltmod" type="serializable">
+            <column name="FECHA_ULTMOD">
+                <comment>Fecha de la ultima modificacion que sufrio el rol.</comment>
+            </column>
+        </property>
+        <property name="ultimoUsuario" type="string">
+            <column name="ULTIMO_USUARIO" length="60">
+                <comment>Nombre del ultimo usuario que modifico el rol.</comment>
+            </column>
+        </property>
+        <property name="activo" type="boolean">
+            <column name="ACTIVO" precision="1" scale="0" not-null="true">
+                <comment>Bandera que indica si el rol se encuentra activo.</comment>
+            </column>
+        </property>
+        <set name="ctUsuarioses" table="CT_USUARIOS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_ROL" precision="22" scale="0" not-null="true">
+                    <comment>Identificador del rol al que pertenece el usuario.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.cgaf.model.CtUsuarios" />
+        </set>
+    </class>
+</hibernate-mapping>
