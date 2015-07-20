@@ -14,7 +14,7 @@ public class HtCincestsuper implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private short idPee;
+	private Integer idPee;
 	private CtVariable ctVariable;
 	private Date fechPeriodo;
 	private long numPeriodo;
@@ -25,7 +25,7 @@ public class HtCincestsuper implements java.io.Serializable {
 	public HtCincestsuper() {
 	}
 
-	public HtCincestsuper(short idPee, CtVariable ctVariable, Date fechPeriodo,
+	public HtCincestsuper(Integer idPee, CtVariable ctVariable, Date fechPeriodo,
 			long numPeriodo) {
 		this.idPee = idPee;
 		this.ctVariable = ctVariable;
@@ -33,7 +33,7 @@ public class HtCincestsuper implements java.io.Serializable {
 		this.numPeriodo = numPeriodo;
 	}
 
-	public HtCincestsuper(short idPee, CtVariable ctVariable, Date fechPeriodo,
+	public HtCincestsuper(Integer idPee, CtVariable ctVariable, Date fechPeriodo,
 			long numPeriodo, Double valValor, Long idVersion,
 			BigDecimal idEstatus) {
 		this.idPee = idPee;
@@ -45,11 +45,11 @@ public class HtCincestsuper implements java.io.Serializable {
 		this.idEstatus = idEstatus;
 	}
 
-	public short getIdPee() {
+	public Integer getIdPee() {
 		return this.idPee;
 	}
 
-	public void setIdPee(short idPee) {
+	public void setIdPee(Integer idPee) {
 		this.idPee = idPee;
 	}
 

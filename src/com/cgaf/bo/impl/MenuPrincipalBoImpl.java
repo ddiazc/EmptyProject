@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cgaf.bo.MenuPrincipalBo;
+import com.cgaf.dao.CtTablaDao;
+import com.cgaf.model.CtTabla;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariables;
 
@@ -13,6 +15,8 @@ import com.cgaf.model.CtVariables;
 */
 
 public class MenuPrincipalBoImpl implements MenuPrincipalBo {
+	
+	CtTablaDao ctTablaDao;
 
 	@Override
 	public List<CtTipos> getTipos() throws Exception {
@@ -122,6 +126,20 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 			}
 		}
 		return newSelectedVarList;
+	}
+
+	@Override
+	public void saveTabla() throws Exception {
+		CtTabla tabla = new CtTabla(1, "Nueva tabla");
+		ctTablaDao.saveTable(tabla);
+	}
+
+	public CtTablaDao getCtTablaDao() {
+		return ctTablaDao;
+	}
+
+	public void setCtTablaDao(CtTablaDao ctTablaDao) {
+		this.ctTablaDao = ctTablaDao;
 	}
 
 }

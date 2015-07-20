@@ -4,7 +4,7 @@
 <!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.CtRoles" table="CT_ROLES">
-        <id name="idRol" type="big_decimal">
+        <id name="idRol" type="integer">
             <column name="ID_ROL" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
@@ -13,12 +13,12 @@
                 <comment>Descripcion del rol de usuario.</comment>
             </column>
         </property>
-        <property name="fechaAlta" type="serializable">
+        <property name="fechaAlta" type="timestamp">
             <column name="FECHA_ALTA" not-null="true">
                 <comment>Fecha de alta del rol.</comment>
             </column>
         </property>
-        <property name="fechaUltmod" type="serializable">
+        <property name="fechaUltmod" type="timestamp">
             <column name="FECHA_ULTMOD">
                 <comment>Fecha de la ultima modificacion que sufrio el rol.</comment>
             </column>

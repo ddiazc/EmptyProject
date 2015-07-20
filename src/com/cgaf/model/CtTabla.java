@@ -14,29 +14,29 @@ public class CtTabla implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int idTabla;
+	private Integer idTabla;
 	private String descTabla;
 	private Set<CtConcepto> ctConceptos = new HashSet<CtConcepto>(0);
 
 	public CtTabla() {
 	}
 
-	public CtTabla(int idTabla, String descTabla) {
+	public CtTabla(Integer idTabla, String descTabla) {
 		this.idTabla = idTabla;
 		this.descTabla = descTabla;
 	}
 
-	public CtTabla(int idTabla, String descTabla, Set<CtConcepto> ctConceptos) {
+	public CtTabla(Integer idTabla, String descTabla, Set<CtConcepto> ctConceptos) {
 		this.idTabla = idTabla;
 		this.descTabla = descTabla;
 		this.ctConceptos = ctConceptos;
 	}
 
-	public int getIdTabla() {
+	public Integer getIdTabla() {
 		return this.idTabla;
 	}
 
-	public void setIdTabla(int idTabla) {
+	public void setIdTabla(Integer idTabla) {
 		this.idTabla = idTabla;
 	}
 

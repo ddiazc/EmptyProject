@@ -11,5 +11,19 @@
         <property name="hibernate.default_schema">SIGAFV2</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
+        <mapping resource="CtConcepto.hbm.xml"/>
+        <mapping resource="CtRoles.hbm.xml"/>
+        <mapping resource="CtTabla.hbm.xml"/>
+        <mapping resource="CtUsuarios.hbm.xml"/>
+        <mapping resource="CtVariable.hbm.xml"/>
+        <mapping resource="DHashes.hbm.xml"/>
+        <mapping resource="DtPlantilla.hbm.xml"/>
+        <mapping resource="HtCincambiental.hbm.xml"/>
+        <mapping resource="HtCinccromatografo.hbm.xml"/>
+        <mapping resource="HtCincderivada.hbm.xml"/>
+        <mapping resource="HtCincenergia.hbm.xml"/>
+        <mapping resource="HtCincenergiaRespaldo.hbm.xml"/>
+        <mapping resource="HtCincestsuper.hbm.xml"/>
+        <mapping resource="MtPlantilla.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

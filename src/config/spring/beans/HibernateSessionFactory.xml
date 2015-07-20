@@ -13,12 +13,25 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.default_schema">ISMAN_WEB</prop></props>
+                <prop key="hibernate.default_schema">SIGAFV2</prop></props>
         </property>
         
         <property name="mappingResources">
             <list>
-                <!--<value>resources/com/cgaf/hibernate/CtUsuarios.hbm.xml</value>-->
+                <value>resources/com/cgaf/hibernate/CtConcepto.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtRoles.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtTabla.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtUsuarios.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtVariable.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/DHashes.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/DtPlantilla.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCincambiental.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCinccromatografo.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCincderivada.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCincenergia.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCincenergiaRespaldo.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/HtCincestsuper.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/MtPlantilla.hbm.xml</value>
             </list>
         </property>
     </bean>

@@ -50,8 +50,9 @@ public class MenuPrincipalBean implements Serializable {
 	private boolean renderedRecords;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String messagePage;
 	private String fileName;
+	private String headerDialogString;
+	private String messagePage;
 	private int columnTipos;
 	private List<String> selectedTipos;
 	private List<String> selectedVars;
@@ -78,6 +79,7 @@ public class MenuPrincipalBean implements Serializable {
     public void init() {
 		try {
 			setFileName("Reporte");
+			setHeaderDialogString("Buscando información...");
 			setMessagePage(FAILURE);
 			setRenderedOriginales(false);
 			setRenderedRecords(false);
@@ -154,6 +156,7 @@ public class MenuPrincipalBean implements Serializable {
 				record.setTatm(39.4);
 				List<DatosBasicos> listToView = new ArrayList<DatosBasicos>();
 				listToView.add(record);
+				menuPrincipalBo.saveTabla();
 				setListOfRecords(listToView);
 				if (getListOfRecords().size() > 0) {
 					setRenderedRecords(true);
@@ -284,9 +287,9 @@ public class MenuPrincipalBean implements Serializable {
 	 */
 	public void limpiar() {
 		try {
-			getSelectedTipos().clear();
-			getSelectedVars().clear();
-			getListOfRecords().clear();
+			setSelectedTipos(null);
+			setSelectedVars(null);
+			setListOfRecords(null);
 			setFechaInicio(null);
 			setFechaFin(null);
 			setRenderedRecords(false);
@@ -422,6 +425,14 @@ public class MenuPrincipalBean implements Serializable {
 
 	public void setListOfRecords(List<DatosBasicos> listOfRecords) {
 		this.listOfRecords = listOfRecords;
+	}
+
+	public String getHeaderDialogString() {
+		return headerDialogString;
+	}
+
+	public void setHeaderDialogString(String headerDialogString) {
+		this.headerDialogString = headerDialogString;
 	}
 
 }

@@ -2,8 +2,7 @@ package com.cgaf.model;
 
 // Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,10 +15,10 @@ public class CtRoles implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private BigDecimal idRol;
+	private Integer idRol;
 	private String descripcionRol;
-	private Serializable fechaAlta;
-	private Serializable fechaUltmod;
+	private Timestamp fechaAlta;
+	private Timestamp fechaUltmod;
 	private String ultimoUsuario;
 	private boolean activo;
 	private Set<CtUsuarios> ctUsuarioses = new HashSet<CtUsuarios>(0);
@@ -27,16 +26,16 @@ public class CtRoles implements java.io.Serializable {
 	public CtRoles() {
 	}
 
-	public CtRoles(BigDecimal idRol, String descripcionRol,
-			Serializable fechaAlta, boolean activo) {
+	public CtRoles(Integer idRol, String descripcionRol,
+			Timestamp fechaAlta, boolean activo) {
 		this.idRol = idRol;
 		this.descripcionRol = descripcionRol;
 		this.fechaAlta = fechaAlta;
 		this.activo = activo;
 	}
 
-	public CtRoles(BigDecimal idRol, String descripcionRol,
-			Serializable fechaAlta, Serializable fechaUltmod,
+	public CtRoles(Integer idRol, String descripcionRol,
+			Timestamp fechaAlta, Timestamp fechaUltmod,
 			String ultimoUsuario, boolean activo, Set<CtUsuarios> ctUsuarioses) {
 		this.idRol = idRol;
 		this.descripcionRol = descripcionRol;
@@ -47,11 +46,11 @@ public class CtRoles implements java.io.Serializable {
 		this.ctUsuarioses = ctUsuarioses;
 	}
 
-	public BigDecimal getIdRol() {
+	public Integer getIdRol() {
 		return this.idRol;
 	}
 
-	public void setIdRol(BigDecimal idRol) {
+	public void setIdRol(Integer idRol) {
 		this.idRol = idRol;
 	}
 
@@ -63,19 +62,19 @@ public class CtRoles implements java.io.Serializable {
 		this.descripcionRol = descripcionRol;
 	}
 
-	public Serializable getFechaAlta() {
+	public Timestamp getFechaAlta() {
 		return this.fechaAlta;
 	}
 
-	public void setFechaAlta(Serializable fechaAlta) {
+	public void setFechaAlta(Timestamp fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public Serializable getFechaUltmod() {
+	public Timestamp getFechaUltmod() {
 		return this.fechaUltmod;
 	}
 
-	public void setFechaUltmod(Serializable fechaUltmod) {
+	public void setFechaUltmod(Timestamp fechaUltmod) {
 		this.fechaUltmod = fechaUltmod;
 	}
 

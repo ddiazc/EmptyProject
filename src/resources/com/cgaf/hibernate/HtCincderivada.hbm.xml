@@ -4,7 +4,7 @@
 <!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.HtCincderivada" table="HT_CINCDERIVADA">
-        <id name="idPee" type="short">
+        <id name="idPee" type="integer">
             <column name="ID_PEE" precision="3" scale="0" />
             <generator class="assigned" />
         </id>

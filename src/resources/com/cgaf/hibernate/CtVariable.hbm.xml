@@ -4,7 +4,7 @@
 <!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.CtVariable" table="CT_VARIABLE">
-        <id name="idVariable" type="int">
+        <id name="idVariable" type="integer">
             <column name="ID_VARIABLE" precision="5" scale="0" />
             <generator class="assigned" />
         </id>

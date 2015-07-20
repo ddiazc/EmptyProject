@@ -66,7 +66,10 @@ public class LoginBean implements Serializable {
         	}
         } catch (Exception e) {
             log.error("Error al autenticar al usuario.", e);
-            return "menuPrincipal";
+            FacesContext.getCurrentInstance().addMessage(null,
+    				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Login!",
+    						"¡Ups! Algo salió mal al intentar iniciar sesión."));
+    		return "login";
         }
     }
 

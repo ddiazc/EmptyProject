@@ -24,15 +24,20 @@
         </h:head>
 
         <h:body>
+        
+        	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" onerror="PF('statusDialog').hide()" oncomplete="PF('statusDialog').hide()" />
+        	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="true" header="#{menuP.headerDialogString}">
+        		<p:graphicImage name="design/ajaxloadingbar.gif"/>
+			</p:dialog>
 
             <p:layout fullPage="true">
 
                 <p:layoutUnit style="border: none;" position="north" size="auto" resizable="false" closable="true" collapsible="false">
-                    <!--<p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>-->
+                    <p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>
                 </p:layoutUnit>
 
                 <p:layoutUnit style="border: none;" position="south" size="auto" resizable="false" closable="true" collapsible="false">
-                    <!--<p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>-->
+                    <p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
@@ -111,7 +116,7 @@
 				        			<f:facet name="{Exporters}">
 				        				<h:commandLink>
 					        				<p:graphicImage value="/resources/primefaces/images/excel.png"/>
-					      					<p:dataExporter type="xls" target="records" fileName="#{menuP.fileName}" postProcessor="#{menuP.postProcessXLS}" />  
+					      					<p:dataExporter type="xls" target="records" fileName="#{menuP.fileName}" postProcessor="#{menuP.postProcessXLS}" />
 					        			</h:commandLink>
 				        			</f:facet>
 				        			<p:column rendered="true" headerText="ID" sortBy="#{list.id}" style="width: auto">

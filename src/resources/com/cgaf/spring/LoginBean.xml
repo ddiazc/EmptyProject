@@ -6,10 +6,15 @@
 	
     <bean name="loginBo" class="com.cgaf.bo.impl.LoginBoImpl">
         <property name="ctUsuariosDao" ref="ctUsuariosDao"></property>
+        <property name="dHashesDao" ref="dHashesDao"></property>
     </bean>
     
     <bean name="ctUsuariosDao" class="com.cgaf.dao.impl.CtUsuariosDaoImpl">
-        <!--<property name="sessionFactory" ref="sessionFactory"></property>-->
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    <bean name="dHashesDao" class="com.cgaf.dao.impl.DHashesDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 	
 </beans>

@@ -41,5 +41,7 @@ public interface MenuPrincipalBo {
 	 * 
 	 */
 	List<String> selectVariables(List<String> selectedTipos) throws Exception;
+	
+	void saveTabla() throws Exception;
 
 }

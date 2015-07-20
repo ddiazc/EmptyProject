@@ -2,8 +2,7 @@ package com.cgaf.model;
 
 // Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +15,14 @@ public class CtUsuarios implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private BigDecimal idUsuario;
+	private Integer idUsuario;
 	private CtRoles ctRoles;
 	private String nombreUsuario;
 	private String apellidopUsuario;
 	private String apellidomUsuario;
 	private String emailUsuario;
-	private Serializable fechaAlta;
-	private Serializable fechaUltmon;
+	private Timestamp fechaAlta;
+	private Timestamp fechaUltmon;
 	private String ultimoUsuario;
 	private boolean activo;
 	private Set<DHashes> DHasheses = new HashSet<DHashes>(0);
@@ -31,9 +30,9 @@ public class CtUsuarios implements java.io.Serializable {
 	public CtUsuarios() {
 	}
 
-	public CtUsuarios(BigDecimal idUsuario, CtRoles ctRoles,
+	public CtUsuarios(Integer idUsuario, CtRoles ctRoles,
 			String nombreUsuario, String apellidopUsuario,
-			Serializable fechaAlta, boolean activo) {
+			Timestamp fechaAlta, boolean activo) {
 		this.idUsuario = idUsuario;
 		this.ctRoles = ctRoles;
 		this.nombreUsuario = nombreUsuario;
@@ -42,10 +41,10 @@ public class CtUsuarios implements java.io.Serializable {
 		this.activo = activo;
 	}
 
-	public CtUsuarios(BigDecimal idUsuario, CtRoles ctRoles,
+	public CtUsuarios(Integer idUsuario, CtRoles ctRoles,
 			String nombreUsuario, String apellidopUsuario,
 			String apellidomUsuario, String emailUsuario,
-			Serializable fechaAlta, Serializable fechaUltmon,
+			Timestamp fechaAlta, Timestamp fechaUltmon,
 			String ultimoUsuario, boolean activo, Set<DHashes> DHasheses) {
 		this.idUsuario = idUsuario;
 		this.ctRoles = ctRoles;
@@ -60,11 +59,11 @@ public class CtUsuarios implements java.io.Serializable {
 		this.DHasheses = DHasheses;
 	}
 
-	public BigDecimal getIdUsuario() {
+	public Integer getIdUsuario() {
 		return this.idUsuario;
 	}
 
-	public void setIdUsuario(BigDecimal idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -108,19 +107,19 @@ public class CtUsuarios implements java.io.Serializable {
 		this.emailUsuario = emailUsuario;
 	}
 
-	public Serializable getFechaAlta() {
+	public Timestamp getFechaAlta() {
 		return this.fechaAlta;
 	}
 
-	public void setFechaAlta(Serializable fechaAlta) {
+	public void setFechaAlta(Timestamp fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public Serializable getFechaUltmon() {
+	public Timestamp getFechaUltmon() {
 		return this.fechaUltmon;
 	}
 
-	public void setFechaUltmon(Serializable fechaUltmon) {
+	public void setFechaUltmon(Timestamp fechaUltmon) {
 		this.fechaUltmon = fechaUltmon;
 	}
 

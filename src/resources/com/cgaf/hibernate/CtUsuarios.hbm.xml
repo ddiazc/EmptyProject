@@ -4,7 +4,7 @@
 <!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.CtUsuarios" table="CT_USUARIOS">
-        <id name="idUsuario" type="big_decimal">
+        <id name="idUsuario" type="integer">
             <column name="ID_USUARIO" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
@@ -33,12 +33,12 @@
                 <comment>Correo electronico del usuario.</comment>
             </column>
         </property>
-        <property name="fechaAlta" type="serializable">
+        <property name="fechaAlta" type="timestamp">
             <column name="FECHA_ALTA" not-null="true">
                 <comment>Fecha de alta del usuario.</comment>
             </column>
         </property>
-        <property name="fechaUltmon" type="serializable">
+        <property name="fechaUltmon" type="timestamp">
             <column name="FECHA_ULTMON">
                 <comment>Fecha de la ultima modificacion que sufrio el usuario.</comment>
             </column>

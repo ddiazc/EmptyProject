@@ -11,24 +11,24 @@ public class CtConcepto implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private short idPee;
+	private Integer idPee;
 	private CtVariable ctVariable;
 	private CtTabla ctTabla;
 
 	public CtConcepto() {
 	}
 
-	public CtConcepto(short idPee, CtVariable ctVariable, CtTabla ctTabla) {
+	public CtConcepto(Integer idPee, CtVariable ctVariable, CtTabla ctTabla) {
 		this.idPee = idPee;
 		this.ctVariable = ctVariable;
 		this.ctTabla = ctTabla;
 	}
 
-	public short getIdPee() {
+	public Integer getIdPee() {
 		return this.idPee;
 	}
 
-	public void setIdPee(short idPee) {
+	public void setIdPee(Integer idPee) {
 		this.idPee = idPee;
 	}
 

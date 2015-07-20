@@ -17,20 +17,32 @@
 					border: hidden;
 					border-style: hidden !important;
 				}
+				.icon {
+					height: 36px;
+					width: 36px;
+					background-position: left center;
+					background-repeat: no-repeat;
+					padding-left: 16px;
+				}
 			</style>
             
         </h:head>
 
         <h:body>
+        
+        	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" onerror="PF('statusDialog').hide()" oncomplete="PF('statusDialog').hide()" />
+        	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="true" header="Iniciando Sesión...">
+        		<p:graphicImage name="design/ajaxloadingbar.gif"/>
+			</p:dialog>
 
             <p:layout fullPage="true">
                 
                 <p:layoutUnit style="border: none;" position="north" size="auto" resizable="false" closable="true" collapsible="false">
-                    <!--<p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>-->
+                    <p:graphicImage name="img/falcon.png" alt="Imagen no disponible"/>
                 </p:layoutUnit>
                 
                 <p:layoutUnit style="border: none;" position="south" size="auto" resizable="false" closable="true" collapsible="false">
-                    <!--<p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>-->
+                    <p:graphicImage name="img/valle_hermoso.png" alt="Imagen no disponible"/>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
@@ -41,7 +53,7 @@
                     		<p:panelGrid style="margin-bottom:10px; width: auto;" styleClass="loginGrid">
                     			<p:row style="width: auto;">
                     				<p:column style="width: auto;">
-                            			<h:outputLabel for="username" value="Username:" />
+                            			<p:graphicImage name="img/userlock.png" alt="Usuario" styleClass="icon"/>
                             		</p:column>
                             		<p:column style="width: auto">
                                 		<p:inputText id="username" value="#{loginBean.username}" required="true" 
@@ -51,7 +63,7 @@
                                 </p:row>
                                 <p:row>
                                 	<p:column style="width: auto">
-                                		<h:outputLabel for="password" value="Password:" />
+                                		<p:graphicImage name="img/padlock.png" alt="Contraseña" styleClass="icon"/>
                                 	</p:column>
                                 	<p:column style="width: auto">
                                 		<p:password id="password" value="#{loginBean.password}" required="true" 

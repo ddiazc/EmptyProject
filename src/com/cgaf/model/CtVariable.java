@@ -14,7 +14,7 @@ public class CtVariable implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int idVariable;
+	private Integer idVariable;
 	private String descVariable;
 	private String descUnidad;
 	private String descNemonico;
@@ -32,12 +32,12 @@ public class CtVariable implements java.io.Serializable {
 	public CtVariable() {
 	}
 
-	public CtVariable(int idVariable, String descVariable) {
+	public CtVariable(Integer idVariable, String descVariable) {
 		this.idVariable = idVariable;
 		this.descVariable = descVariable;
 	}
 
-	public CtVariable(int idVariable, String descVariable, String descUnidad,
+	public CtVariable(Integer idVariable, String descVariable, String descUnidad,
 			String descNemonico, Set<HtCinccromatografo> htCinccromatografos,
 			Set<HtCincestsuper> htCincestsupers,
 			Set<HtCincenergia> htCincenergias,
@@ -57,11 +57,11 @@ public class CtVariable implements java.io.Serializable {
 		this.htCincenergiaRespaldos = htCincenergiaRespaldos;
 	}
 
-	public int getIdVariable() {
+	public Integer getIdVariable() {
 		return this.idVariable;
 	}
 
-	public void setIdVariable(int idVariable) {
+	public void setIdVariable(Integer idVariable) {
 		this.idVariable = idVariable;
 	}
 

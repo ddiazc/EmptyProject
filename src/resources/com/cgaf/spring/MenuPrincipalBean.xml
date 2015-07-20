@@ -5,7 +5,11 @@
 	default-lazy-init="true" default-autowire="byName">
 	
     <bean name="menuPrincipalBo" class="com.cgaf.bo.impl.MenuPrincipalBoImpl">
-        <!--<property name="ctUsuariosDao" ref="ctUsuariosDao"></property>-->
+        <property name="ctTablaDao" ref="ctTablaDao"></property>
     </bean>
+    
+    <bean name="ctTablaDao" class="com.cgaf.dao.impl.CtTablaDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 </beans>
