@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cgaf.bo.MenuPrincipalBo;
-import com.cgaf.dao.CtTablaDao;
-import com.cgaf.model.CtTabla;
+import com.cgaf.dao.CtVariableDao;
 import com.cgaf.model.CtTipos;
-import com.cgaf.model.CtVariables;
+import com.cgaf.model.CtVariable;
 
 /**
 *
@@ -16,7 +15,7 @@ import com.cgaf.model.CtVariables;
 
 public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	
-	CtTablaDao ctTablaDao;
+	CtVariableDao ctVariableDao;
 
 	@Override
 	public List<CtTipos> getTipos() throws Exception {
@@ -29,34 +28,10 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	}
 
 	@Override
-	public List<CtVariables> getVariables() throws Exception {
-		List<CtVariables> variables = new ArrayList<CtVariables>();
-		variables.add(new CtVariables(1, "Todas"));
-		variables.add(new CtVariables(2, "Temperatura atmosférica"));
-		variables.add(new CtVariables(3, "Humedad atmosférica"));
-		variables.add(new CtVariables(4, "Presión atmosférica"));
-		variables.add(new CtVariables(5, "Poder Calorífico Inferior kJ/kg"));
-		variables.add(new CtVariables(6, "Poder Calorífico Superior kJ/kg"));
-		variables.add(new CtVariables(7, "Densidad Relativa"));
-		variables.add(new CtVariables(8, "Poder Calorífico Inferior kJ/M3"));
-		variables.add(new CtVariables(9, "Poder Calorífico Superior kJ/M3"));
-		variables.add(new CtVariables(10, "Factor de Potencia"));
-		variables.add(new CtVariables(11, "Energía Línea 1 Principal Entrada"));
-		variables.add(new CtVariables(12, "Energía Línea 1 Principal Salida"));
-		variables.add(new CtVariables(13, "Energía Línea 2 Principal Entrada"));
-		variables.add(new CtVariables(14, "Energía Línea 2 Principal Salida"));
-		variables.add(new CtVariables(15, "Energía Línea 1 Principal Q1"));
-		variables.add(new CtVariables(16, "Energía Línea 1 Principal Q4"));
-		variables.add(new CtVariables(17, "Energía Línea 2 Principal Q1"));
-		variables.add(new CtVariables(18, "Energía Línea 2 Principal Q4"));
-		variables.add(new CtVariables(19, "Energía Línea 1 Principal Entrada"));
-		variables.add(new CtVariables(20, "Energía Línea 1 Principal Salida"));
-		variables.add(new CtVariables(21, "Energía Línea 2 Principal Entrada"));
-		variables.add(new CtVariables(22, "Energía Línea 2 Principal Salida"));
-		variables.add(new CtVariables(23, "Energía Línea 1 Principal Q1"));
-		variables.add(new CtVariables(24, "Energía Línea 1 Principal Q4"));
-		variables.add(new CtVariables(25, "Energía Línea 2 Principal Q1"));
-		variables.add(new CtVariables(26, "Energía Línea 2 Principal Q4"));
+	public List<CtVariable> getVariables() throws Exception {
+		List<CtVariable> variables = new ArrayList<CtVariable>();
+		variables.add(new CtVariable(1, "Todas"));
+		variables.addAll(ctVariableDao.getVariables());
 		return variables;
 	}
 
@@ -127,19 +102,99 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 		}
 		return newSelectedVarList;
 	}
-
+	
 	@Override
-	public void saveTabla() throws Exception {
-		CtTabla tabla = new CtTabla(1, "Nueva tabla");
-		ctTablaDao.saveTable(tabla);
+	public List<String> getFirstSubHeaders() throws Exception {
+		List<String> subHeaders = new ArrayList<String>();
+		subHeaders.add("Unidad");
+		subHeaders.add("yyyy/mm/dd hh:mm:ss");
+		subHeaders.add("yyyy/mm/dd hh:mm:ss");
+		subHeaders.add("sin unidad");
+		subHeaders.add("kJ/kWh");
+		subHeaders.add("kJ/h");
+		subHeaders.add("celsius");
+		subHeaders.add("porcentaje");
+		subHeaders.add("bar");
+		subHeaders.add("kW");
+		subHeaders.add("kW");
+		subHeaders.add("kW");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kWh");
+		subHeaders.add("kJ/kg");
+		subHeaders.add("kJ/kg");
+		subHeaders.add("sin unidad");
+		subHeaders.add("sin unidad");
+		subHeaders.add("bar");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kVARh");
+		subHeaders.add("kJ/M3");
+		subHeaders.add("kJ/M3");
+		return subHeaders;
+	}
+	
+	@Override
+	public List<String> getSecondSubHeaders() throws Exception {
+		List<String> subHeaders = new ArrayList<String>();
+		subHeaders.add("Tag");
+		subHeaders.add("FechaIni");
+		subHeaders.add("FechaFin");
+		subHeaders.add("Carga");
+		subHeaders.add("CTUNGg");
+		subHeaders.add("CTOVg");
+		subHeaders.add("Tatm");
+		subHeaders.add("Hatm");
+		subHeaders.add("Patm");
+		subHeaders.add("CDDreal");
+		subHeaders.add("Potencia_v");
+		subHeaders.add("Potencia");
+		subHeaders.add("EnTotal");
+		subHeaders.add("EnCinco");
+		subHeaders.add("EnLin1PrinEnt");
+		subHeaders.add("EnLin1PrinSal");
+		subHeaders.add("EnLin1RespEnt");
+		subHeaders.add("EnLin1RespSal");
+		subHeaders.add("EnLin2PrinEnt");
+		subHeaders.add("EnLin2PrinSal");
+		subHeaders.add("EnLin2RespEnt");
+		subHeaders.add("EnLin2RespSal");
+		subHeaders.add("PCIgas");
+		subHeaders.add("PCSgas");
+		subHeaders.add("DensGas");
+		subHeaders.add("FactPot");
+		subHeaders.add("PresCond");
+		subHeaders.add("EnLin1PrinReacQ1");
+		subHeaders.add("EnLin1PrinReacQ4");
+		subHeaders.add("EnLin1RespReacQ1");
+		subHeaders.add("EnLin1RespReacQ4");
+		subHeaders.add("EnLin2PrinReacQ1");
+		subHeaders.add("EnLin2PrinReacQ4");
+		subHeaders.add("EnLin2RespReacQ1");
+		subHeaders.add("EnLin2RespReacQ4");
+		subHeaders.add("PCIgasM3");
+		subHeaders.add("PCSgasM3");
+		return subHeaders;
 	}
 
-	public CtTablaDao getCtTablaDao() {
-		return ctTablaDao;
+	public CtVariableDao getCtVariableDao() {
+		return ctVariableDao;
 	}
 
-	public void setCtTablaDao(CtTablaDao ctTablaDao) {
-		this.ctTablaDao = ctTablaDao;
+	public void setCtVariableDao(CtVariableDao ctVariableDao) {
+		this.ctVariableDao = ctVariableDao;
 	}
 
 }

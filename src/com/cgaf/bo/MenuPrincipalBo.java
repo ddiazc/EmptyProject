@@ -3,7 +3,7 @@ package com.cgaf.bo;
 import java.util.List;
 
 import com.cgaf.model.CtTipos;
-import com.cgaf.model.CtVariables;
+import com.cgaf.model.CtVariable;
 
 /**
 *
@@ -30,7 +30,7 @@ public interface MenuPrincipalBo {
 	 * @throws Exception
 	 * 
 	 */
-	List<CtVariables> getVariables() throws Exception;
+	List<CtVariable> getVariables() throws Exception;
 	
 	/**
 	 * Metodo que rellena selleciona variables segun el tipo seleccionado.
@@ -42,6 +42,22 @@ public interface MenuPrincipalBo {
 	 */
 	List<String> selectVariables(List<String> selectedTipos) throws Exception;
 	
-	void saveTabla() throws Exception;
+	/**
+	 * Metodo que devuelve las etiquetas que se imprimen debajo de los headers.
+	 * 
+	 * @return Devuelve una lista de strings.
+	 * @throws Exception
+	 * 
+	 */
+	List<String> getFirstSubHeaders() throws Exception;
+	
+	/**
+	 * Metodo que devuelve las etiquetas que se imprimen debajo de los primeros sub headers.
+	 * 
+	 * @return Devuelve una lista de strings.
+	 * @throws Exception
+	 * 
+	 */
+	List<String> getSecondSubHeaders() throws Exception;
 
 }

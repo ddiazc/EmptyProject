@@ -17,16 +17,6 @@ public class CtUsuariosDaoImpl extends HibernateDaoSupport implements CtUsuarios
     
     private static final Logger log = Logger.getLogger(CtUsuariosDaoImpl.class);
 
-    @Override
-    public boolean authenticate(String username, String password) throws Exception {
-        log.info("Validando credenciales con la base de datos.");
-        if (username.equals("admin") && password.equals("123456")) {
-        	return true;
-        } else {
-        	return false;
-        }
-    }
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public CtUsuarios getUserInfo(String username) throws Exception {
@@ -34,7 +24,7 @@ public class CtUsuariosDaoImpl extends HibernateDaoSupport implements CtUsuarios
 		Object[] params = new Object[] {username};
 		List<CtUsuarios> listOfUsers = 	getHibernateTemplate().find("FROM CtUsuarios WHERE nombreUsuario = ?", params);
 		if (listOfUsers.size() > 0) {
-			log.debug("Se encontro informacion asociada al usuario: " + username);
+			log.info("Se encontro informacion asociada al usuario: " + username);
 			return listOfUsers.get(0);
 		} else {
 			return null;

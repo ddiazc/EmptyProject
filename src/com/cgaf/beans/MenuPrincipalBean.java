@@ -18,18 +18,14 @@ import javax.servlet.http.HttpSession;
 import javax.xml.ws.http.HTTPException;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CellStyle;
 
 import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.filters.Util;
 import com.cgaf.model.CtTipos;
-import com.cgaf.model.CtVariables;
+import com.cgaf.model.CtVariable;
 import com.cgaf.util.Validators;
+import com.cgaf.util.excel.FileManager;
 import com.cgaf.vo.DatosBasicos;
 
 /**
@@ -57,12 +53,15 @@ public class MenuPrincipalBean implements Serializable {
 	private List<String> selectedTipos;
 	private List<String> selectedVars;
 	private List<CtTipos> tipos;
-	private List<CtVariables> variables;
+	private List<CtVariable> variables;
 	private List<DatosBasicos> listOfRecords;
 	private static final String FAILURE;
 	
 	@ManagedProperty(value = "#{menuPrincipalBo}")
 	MenuPrincipalBo menuPrincipalBo;
+	
+	@ManagedProperty(value = "#{fileManager}")
+	FileManager fileManager;
 	
 	private static final Logger log = Logger.getLogger(MenuPrincipalBean.class);
 	
@@ -79,7 +78,7 @@ public class MenuPrincipalBean implements Serializable {
     public void init() {
 		try {
 			setFileName("Reporte");
-			setHeaderDialogString("Buscando información...");
+			setHeaderDialogString("Process...");
 			setMessagePage(FAILURE);
 			setRenderedOriginales(false);
 			setRenderedRecords(false);
@@ -156,7 +155,6 @@ public class MenuPrincipalBean implements Serializable {
 				record.setTatm(39.4);
 				List<DatosBasicos> listToView = new ArrayList<DatosBasicos>();
 				listToView.add(record);
-				menuPrincipalBo.saveTabla();
 				setListOfRecords(listToView);
 				if (getListOfRecords().size() > 0) {
 					setRenderedRecords(true);
@@ -181,17 +179,10 @@ public class MenuPrincipalBean implements Serializable {
 	 */
 	public void postProcessXLS(Object document) {
 		try {
-			HSSFWorkbook wb = (HSSFWorkbook) document;
-	        HSSFSheet sheet = wb.getSheetAt(0);
-	        HSSFCellStyle cellStyle = wb.createCellStyle();
-	        cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
-	        for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
-	        	HSSFRow rows = sheet.getRow(i);
-	        	for (int j = 0; j < rows.getPhysicalNumberOfCells(); j++) {
-	        		HSSFCell cell = rows.getCell(j);
-	        		cell.setCellStyle(cellStyle);
-	        	}
-	        }
+			HSSFWorkbook xlsDocument = (HSSFWorkbook) document;
+			fileManager.addRow(xlsDocument, menuPrincipalBo.getFirstSubHeaders());
+			fileManager.formatXLS(xlsDocument);
+			fileManager.styleCells(xlsDocument);
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", getMessagePage()));
@@ -371,11 +362,11 @@ public class MenuPrincipalBean implements Serializable {
 		this.tipos = tipos;
 	}
 
-	public List<CtVariables> getVariables() {
+	public List<CtVariable> getVariables() {
 		return variables;
 	}
 
-	public void setVariables(List<CtVariables> variables) {
+	public void setVariables(List<CtVariable> variables) {
 		this.variables = variables;
 	}
 
@@ -433,6 +424,14 @@ public class MenuPrincipalBean implements Serializable {
 
 	public void setHeaderDialogString(String headerDialogString) {
 		this.headerDialogString = headerDialogString;
+	}
+	
+		public FileManager getFileManager() {
+		return fileManager;
+	}
+
+	public void setFileManager(FileManager fileManager) {
+		this.fileManager = fileManager;
 	}
 
 }

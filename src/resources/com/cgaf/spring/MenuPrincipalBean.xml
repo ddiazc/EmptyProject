@@ -5,11 +5,13 @@
 	default-lazy-init="true" default-autowire="byName">
 	
     <bean name="menuPrincipalBo" class="com.cgaf.bo.impl.MenuPrincipalBoImpl">
-        <property name="ctTablaDao" ref="ctTablaDao"></property>
+        <property name="ctVariableDao" ref="ctVariableDao"></property>
     </bean>
     
-    <bean name="ctTablaDao" class="com.cgaf.dao.impl.CtTablaDaoImpl">
+    <bean name="ctVariableDao" class="com.cgaf.dao.impl.CtVariableDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+    <bean name="fileManager" class="com.cgaf.util.excel.impl.FileManagerImpl"/>
 	
 </beans>
