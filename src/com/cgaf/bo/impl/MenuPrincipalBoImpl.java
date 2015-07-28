@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cgaf.bo.MenuPrincipalBo;
+import com.cgaf.dao.CtConceptoDao;
+import com.cgaf.dao.CtTablaDao;
 import com.cgaf.dao.CtVariableDao;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
@@ -15,7 +17,9 @@ import com.cgaf.model.CtVariable;
 
 public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	
+	CtTablaDao ctTablaDao;
 	CtVariableDao ctVariableDao;
+	CtConceptoDao ctConceptoDao;
 
 	@Override
 	public List<CtTipos> getTipos() throws Exception {
@@ -40,64 +44,30 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 		List<String> newSelectedVarList = new ArrayList<String>();
 		for (String item : selectedTipos) {
 			if (item.equals("1")) {
+				List<CtVariable> listOfVars = ctVariableDao.getVariables();
 				newSelectedVarList.add("1");
-				newSelectedVarList.add("2");
-				newSelectedVarList.add("3");
-				newSelectedVarList.add("4");
-				newSelectedVarList.add("5");
-				newSelectedVarList.add("6");
-				newSelectedVarList.add("7");
-				newSelectedVarList.add("8");
-				newSelectedVarList.add("9");
-				newSelectedVarList.add("10");
-				newSelectedVarList.add("11");
-				newSelectedVarList.add("12");
-				newSelectedVarList.add("13");
-				newSelectedVarList.add("14");
-				newSelectedVarList.add("15");
-				newSelectedVarList.add("16");
-				newSelectedVarList.add("17");
-				newSelectedVarList.add("18");
-				newSelectedVarList.add("19");
-				newSelectedVarList.add("20");
-				newSelectedVarList.add("21");
-				newSelectedVarList.add("22");
-				newSelectedVarList.add("23");
-				newSelectedVarList.add("24");
-				newSelectedVarList.add("25");
-				newSelectedVarList.add("26");
+				for (CtVariable variable : listOfVars) {
+					newSelectedVarList.add(variable.getIdVariable().toString());
+				}
 				return newSelectedVarList;
 			}
 			if (item.equals("2")) {
-				newSelectedVarList.add("2");
-				newSelectedVarList.add("3");
-				newSelectedVarList.add("4");
+				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCAMBIENTAL");
+				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
+				newSelectedVarList.addAll(idsVariables);
+				return newSelectedVarList;
 			}
 			if (item.equals("3")) {
-				newSelectedVarList.add("5");
-				newSelectedVarList.add("6");
-				newSelectedVarList.add("7");
-				newSelectedVarList.add("8");
-				newSelectedVarList.add("9");
-				newSelectedVarList.add("10");
+				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCCROMATOGRAFO");
+				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
+				newSelectedVarList.addAll(idsVariables);
+				return newSelectedVarList;
 			}
 			if (item.equals("4")) {
-				newSelectedVarList.add("11");
-				newSelectedVarList.add("12");
-				newSelectedVarList.add("13");
-				newSelectedVarList.add("14");
-				newSelectedVarList.add("15");
-				newSelectedVarList.add("16");
-				newSelectedVarList.add("17");
-				newSelectedVarList.add("18");
-				newSelectedVarList.add("19");
-				newSelectedVarList.add("20");
-				newSelectedVarList.add("21");
-				newSelectedVarList.add("22");
-				newSelectedVarList.add("23");
-				newSelectedVarList.add("24");
-				newSelectedVarList.add("25");
-				newSelectedVarList.add("26");
+				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCENERGIA");
+				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
+				newSelectedVarList.addAll(idsVariables);
+				return newSelectedVarList;
 			}
 		}
 		return newSelectedVarList;
@@ -195,6 +165,22 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 
 	public void setCtVariableDao(CtVariableDao ctVariableDao) {
 		this.ctVariableDao = ctVariableDao;
+	}
+
+	public CtTablaDao getCtTablaDao() {
+		return ctTablaDao;
+	}
+
+	public void setCtTablaDao(CtTablaDao ctTablaDao) {
+		this.ctTablaDao = ctTablaDao;
+	}
+
+	public CtConceptoDao getCtConceptoDao() {
+		return ctConceptoDao;
+	}
+
+	public void setCtConceptoDao(CtConceptoDao ctConceptoDao) {
+		this.ctConceptoDao = ctConceptoDao;
 	}
 
 }
