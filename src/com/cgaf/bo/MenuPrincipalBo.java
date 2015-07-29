@@ -2,6 +2,7 @@ package com.cgaf.bo;
 
 import java.util.List;
 
+import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
 
@@ -59,5 +60,17 @@ public interface MenuPrincipalBo {
 	 * 
 	 */
 	List<String> getSecondSubHeaders() throws Exception;
+	
+	/**
+	 * Metodo que invoca el DAO de la tabla CT_CONCEPTO para obtener los nombres
+	 * de las tablas pasadas como argumento.
+	 * 
+	 * @param variables Lista de los identificadores de las variables de las cuales se
+	 * requiere saber el nombre de la tabla donde se enuentran almacenadas.
+	 * @return Devuelve una lista de objetos de tipo CtConcepto.
+	 * @throws Exception
+	 * 
+	 */
+	List<CtConcepto> getTableNames(List<String> variables) throws Exception;
 
 }

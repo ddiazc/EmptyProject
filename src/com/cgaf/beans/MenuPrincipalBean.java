@@ -1,9 +1,7 @@
 package com.cgaf.beans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +20,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.filters.Util;
+import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
 import com.cgaf.util.Validators;
@@ -49,13 +48,47 @@ public class MenuPrincipalBean implements Serializable {
 	private String fileName;
 	private String headerDialogString;
 	private String messagePage;
-	private int columnTipos;
 	private List<String> selectedTipos;
 	private List<String> selectedVars;
 	private List<CtTipos> tipos;
 	private List<CtVariable> variables;
 	private List<DatosBasicos> listOfRecords;
 	private static final String FAILURE;
+	
+	private boolean carga;
+	private boolean cTUNGg;
+	private boolean cTOVg;
+	private boolean tatm;
+	private boolean hatm;
+	private boolean patm;
+	private boolean cDDreal;
+	private boolean potenciaV;
+	private boolean potencia;
+	private boolean enTotal;
+	private boolean enCinco;
+	private boolean enLin1PrinEnt;
+	private boolean enLin1PrinSal;
+	private boolean enLin1RespEnt;
+	private boolean enLin1RespSal;
+	private boolean enLin2PrinEnt;
+	private boolean enLin2PrinSal;
+	private boolean enLin2RespEnt;
+	private boolean enLin2RespSal;
+	private boolean pCIgas;
+	private boolean pCSgas;
+	private boolean densGas;
+	private boolean factPot;
+	private boolean presCond;
+	private boolean enLin1PrinReacQ1;
+	private boolean enLin1PrinReacQ4;
+	private boolean enLin1RespReacQ1;
+	private boolean enLin1RespReacQ4;
+	private boolean enLin2PrinReacQ1;
+	private boolean enLin2PrinReacQ4;
+	private boolean enLin2RespReacQ1;
+	private boolean enLin2RespReacQ4;
+	private boolean pCIgasM3;
+	private boolean pCSgasM3;
 	
 	@ManagedProperty(value = "#{menuPrincipalBo}")
 	MenuPrincipalBo menuPrincipalBo;
@@ -78,6 +111,7 @@ public class MenuPrincipalBean implements Serializable {
     public void init() {
 		try {
 			setFileName("Reporte");
+			setRendered();
 			setHeaderDialogString("Process...");
 			setMessagePage(FAILURE);
 			setRenderedOriginales(false);
@@ -100,11 +134,6 @@ public class MenuPrincipalBean implements Serializable {
 			setRenderedOriginales(true);
 			setTipos(menuPrincipalBo.getTipos());
 			setVariables(menuPrincipalBo.getVariables());
-			if (getTipos().size() > 4) {
-				setColumnTipos(getTipos().size()/4);
-			} else {
-				setColumnTipos(1);
-			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", getMessagePage()));
@@ -119,46 +148,10 @@ public class MenuPrincipalBean implements Serializable {
 	public void getReporte() {
 		try {
 			if (checkInputData()) {
-				DatosBasicos record = new DatosBasicos();
-				record.setId(1);
-				record.setCarga(10.1);
-				record.setcDDreal(531558.535);
-				record.setCtovg(12.1);
-				record.setCtungg(13.1);
-				record.setDensGas(14.1);
-				record.setEnCinco(15.1);
-				record.setEnLin1PrinEnt(16.1);
-				record.setEnLin1PrinReacQ1(17.1);
-				record.setEnLin1PrinReacQ4(18.1);
-				record.setEnLin1PrinSal(19.1);
-				record.setEnLin1RespEnt(20.1);
-				record.setEnLin1RespReacQ1(21.1);
-				record.setEnLin1RespReacQ4(22.1);
-				record.setEnLin1RespSal(23.1);
-				record.setEnLin2PrinEnt(24.1);
-				record.setEnLin2PrinReacQ1(25.1);
-				record.setEnLin2PrinReacQ4(26.1);
-				record.setEnLin2RespSal(27.1);
-				record.setEnTotal(28.1);
-				record.setFactPot(29.1);
-				record.setFechaFin(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-				record.setFechaIni(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-				record.setHatm(30.1);
-				record.setPatm(31.1);
-				record.setpCIgas(32.1);
-				record.setpCIgasM3(33.1);
-				record.setpCSgas(34.1);
-				record.setpCSgasM3(35.1);
-				record.setPotencia(349332.001);
-				record.setPotenciaV(328592.000);
-				record.setPresCond(38.1);
-				record.setTatm(39.4);
-				List<DatosBasicos> listToView = new ArrayList<DatosBasicos>();
-				listToView.add(record);
-				setListOfRecords(listToView);
-				if (getListOfRecords().size() > 0) {
+				List<CtConcepto> listOfRecords = menuPrincipalBo.getTableNames(getSelectedVars());
+				if (listOfRecords.size() > 0) {
 					setRenderedRecords(true);
-				}				
+				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", getMessagePage()));
@@ -313,6 +306,43 @@ public class MenuPrincipalBean implements Serializable {
     	
         return "login";
      }
+    
+    public void setRendered() {
+    	setCarga(true);
+    	setcTUNGg(true);
+    	setcTOVg(true);
+    	setTatm(true);
+    	setHatm(true);
+    	setPatm(true);
+    	setcDDreal(true);
+    	setPotenciaV(true);
+    	setPotencia(true);
+    	setEnTotal(true);
+    	setEnCinco(true);
+    	setEnLin1PrinEnt(true);
+    	setEnLin1PrinSal(true);
+    	setEnLin1RespEnt(true);
+    	setEnLin1RespSal(true);
+    	setEnLin2PrinEnt(true);
+    	setEnLin2PrinSal(true);
+    	setEnLin2RespEnt(true);
+    	setEnLin2RespSal(true);
+    	setpCIgas(true);
+    	setpCSgas(true);
+    	setDensGas(true);
+    	setFactPot(true);
+    	setPresCond(true);
+    	setEnLin1PrinReacQ1(true);
+    	setEnLin1PrinReacQ4(true);
+    	setEnLin1RespReacQ1(true);
+    	setEnLin1RespReacQ4(true);
+    	setEnLin2PrinReacQ1(true);
+    	setEnLin2PrinReacQ4(true);
+    	setEnLin2RespReacQ1(true);
+    	setEnLin2RespReacQ4(true);
+    	setpCIgasM3(true);
+    	setpCSgasM3(true);
+    }
 
 	public boolean isRenderedOriginales() {
 		return renderedOriginales;
@@ -394,14 +424,6 @@ public class MenuPrincipalBean implements Serializable {
 		this.fileName = fileName;
 	}
 
-	public int getColumnTipos() {
-		return columnTipos;
-	}
-
-	public void setColumnTipos(int columnTipos) {
-		this.columnTipos = columnTipos;
-	}
-
 	public boolean isRenderedRecords() {
 		return renderedRecords;
 	}
@@ -432,6 +454,278 @@ public class MenuPrincipalBean implements Serializable {
 
 	public void setFileManager(FileManager fileManager) {
 		this.fileManager = fileManager;
+	}
+
+	public boolean isCarga() {
+		return carga;
+	}
+
+	public void setCarga(boolean carga) {
+		this.carga = carga;
+	}
+
+	public boolean iscTUNGg() {
+		return cTUNGg;
+	}
+
+	public void setcTUNGg(boolean cTUNGg) {
+		this.cTUNGg = cTUNGg;
+	}
+
+	public boolean iscTOVg() {
+		return cTOVg;
+	}
+
+	public void setcTOVg(boolean cTOVg) {
+		this.cTOVg = cTOVg;
+	}
+
+	public boolean isTatm() {
+		return tatm;
+	}
+
+	public void setTatm(boolean tatm) {
+		this.tatm = tatm;
+	}
+
+	public boolean isHatm() {
+		return hatm;
+	}
+
+	public void setHatm(boolean hatm) {
+		this.hatm = hatm;
+	}
+
+	public boolean isPatm() {
+		return patm;
+	}
+
+	public void setPatm(boolean patm) {
+		this.patm = patm;
+	}
+
+	public boolean iscDDreal() {
+		return cDDreal;
+	}
+
+	public void setcDDreal(boolean cDDreal) {
+		this.cDDreal = cDDreal;
+	}
+
+	public boolean isPotenciaV() {
+		return potenciaV;
+	}
+
+	public void setPotenciaV(boolean potenciaV) {
+		this.potenciaV = potenciaV;
+	}
+
+	public boolean isPotencia() {
+		return potencia;
+	}
+
+	public void setPotencia(boolean potencia) {
+		this.potencia = potencia;
+	}
+
+	public boolean isEnTotal() {
+		return enTotal;
+	}
+
+	public void setEnTotal(boolean enTotal) {
+		this.enTotal = enTotal;
+	}
+
+	public boolean isEnCinco() {
+		return enCinco;
+	}
+
+	public void setEnCinco(boolean enCinco) {
+		this.enCinco = enCinco;
+	}
+
+	public boolean isEnLin1PrinEnt() {
+		return enLin1PrinEnt;
+	}
+
+	public void setEnLin1PrinEnt(boolean enLin1PrinEnt) {
+		this.enLin1PrinEnt = enLin1PrinEnt;
+	}
+
+	public boolean isEnLin1PrinSal() {
+		return enLin1PrinSal;
+	}
+
+	public void setEnLin1PrinSal(boolean enLin1PrinSal) {
+		this.enLin1PrinSal = enLin1PrinSal;
+	}
+
+	public boolean isEnLin1RespEnt() {
+		return enLin1RespEnt;
+	}
+
+	public void setEnLin1RespEnt(boolean enLin1RespEnt) {
+		this.enLin1RespEnt = enLin1RespEnt;
+	}
+
+	public boolean isEnLin1RespSal() {
+		return enLin1RespSal;
+	}
+
+	public void setEnLin1RespSal(boolean enLin1RespSal) {
+		this.enLin1RespSal = enLin1RespSal;
+	}
+
+	public boolean isEnLin2PrinEnt() {
+		return enLin2PrinEnt;
+	}
+
+	public void setEnLin2PrinEnt(boolean enLin2PrinEnt) {
+		this.enLin2PrinEnt = enLin2PrinEnt;
+	}
+
+	public boolean isEnLin2PrinSal() {
+		return enLin2PrinSal;
+	}
+
+	public void setEnLin2PrinSal(boolean enLin2PrinSal) {
+		this.enLin2PrinSal = enLin2PrinSal;
+	}
+
+	public boolean isEnLin2RespEnt() {
+		return enLin2RespEnt;
+	}
+
+	public void setEnLin2RespEnt(boolean enLin2RespEnt) {
+		this.enLin2RespEnt = enLin2RespEnt;
+	}
+
+	public boolean isEnLin2RespSal() {
+		return enLin2RespSal;
+	}
+
+	public void setEnLin2RespSal(boolean enLin2RespSal) {
+		this.enLin2RespSal = enLin2RespSal;
+	}
+
+	public boolean ispCIgas() {
+		return pCIgas;
+	}
+
+	public void setpCIgas(boolean pCIgas) {
+		this.pCIgas = pCIgas;
+	}
+
+	public boolean ispCSgas() {
+		return pCSgas;
+	}
+
+	public void setpCSgas(boolean pCSgas) {
+		this.pCSgas = pCSgas;
+	}
+
+	public boolean isDensGas() {
+		return densGas;
+	}
+
+	public void setDensGas(boolean densGas) {
+		this.densGas = densGas;
+	}
+
+	public boolean isFactPot() {
+		return factPot;
+	}
+
+	public void setFactPot(boolean factPot) {
+		this.factPot = factPot;
+	}
+
+	public boolean isPresCond() {
+		return presCond;
+	}
+
+	public void setPresCond(boolean presCond) {
+		this.presCond = presCond;
+	}
+
+	public boolean isEnLin1PrinReacQ1() {
+		return enLin1PrinReacQ1;
+	}
+
+	public void setEnLin1PrinReacQ1(boolean enLin1PrinReacQ1) {
+		this.enLin1PrinReacQ1 = enLin1PrinReacQ1;
+	}
+
+	public boolean isEnLin1PrinReacQ4() {
+		return enLin1PrinReacQ4;
+	}
+
+	public void setEnLin1PrinReacQ4(boolean enLin1PrinReacQ4) {
+		this.enLin1PrinReacQ4 = enLin1PrinReacQ4;
+	}
+
+	public boolean isEnLin1RespReacQ1() {
+		return enLin1RespReacQ1;
+	}
+
+	public void setEnLin1RespReacQ1(boolean enLin1RespReacQ1) {
+		this.enLin1RespReacQ1 = enLin1RespReacQ1;
+	}
+
+	public boolean isEnLin1RespReacQ4() {
+		return enLin1RespReacQ4;
+	}
+
+	public void setEnLin1RespReacQ4(boolean enLin1RespReacQ4) {
+		this.enLin1RespReacQ4 = enLin1RespReacQ4;
+	}
+
+	public boolean isEnLin2PrinReacQ1() {
+		return enLin2PrinReacQ1;
+	}
+
+	public void setEnLin2PrinReacQ1(boolean enLin2PrinReacQ1) {
+		this.enLin2PrinReacQ1 = enLin2PrinReacQ1;
+	}
+
+	public boolean isEnLin2PrinReacQ4() {
+		return enLin2PrinReacQ4;
+	}
+
+	public void setEnLin2PrinReacQ4(boolean enLin2PrinReacQ4) {
+		this.enLin2PrinReacQ4 = enLin2PrinReacQ4;
+	}
+
+	public boolean isEnLin2RespReacQ1() {
+		return enLin2RespReacQ1;
+	}
+
+	public void setEnLin2RespReacQ1(boolean enLin2RespReacQ1) {
+		this.enLin2RespReacQ1 = enLin2RespReacQ1;
+	}
+
+	public boolean isEnLin2RespReacQ4() {
+		return enLin2RespReacQ4;
+	}
+
+	public void setEnLin2RespReacQ4(boolean enLin2RespReacQ4) {
+		this.enLin2RespReacQ4 = enLin2RespReacQ4;
+	}
+
+	public boolean ispCIgasM3() {
+		return pCIgasM3;
+	}
+
+	public void setpCIgasM3(boolean pCIgasM3) {
+		this.pCIgasM3 = pCIgasM3;
+	}
+
+	public boolean ispCSgasM3() {
+		return pCSgasM3;
+	}
+
+	public void setpCSgasM3(boolean pCSgasM3) {
+		this.pCSgasM3 = pCSgasM3;
 	}
 
 }

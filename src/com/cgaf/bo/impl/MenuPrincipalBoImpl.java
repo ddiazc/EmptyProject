@@ -7,6 +7,7 @@ import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.dao.CtConceptoDao;
 import com.cgaf.dao.CtTablaDao;
 import com.cgaf.dao.CtVariableDao;
+import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
 
@@ -55,22 +56,28 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCAMBIENTAL");
 				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
 				newSelectedVarList.addAll(idsVariables);
-				return newSelectedVarList;
 			}
 			if (item.equals("3")) {
 				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCCROMATOGRAFO");
 				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
 				newSelectedVarList.addAll(idsVariables);
-				return newSelectedVarList;
 			}
 			if (item.equals("4")) {
 				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCENERGIA");
 				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
 				newSelectedVarList.addAll(idsVariables);
-				return newSelectedVarList;
 			}
 		}
 		return newSelectedVarList;
+	}
+	
+	@Override
+	public List<CtConcepto> getTableNames(List<String> variables) throws Exception {
+		List<Integer> newVars = new ArrayList<Integer>();
+		for (String item : variables) {
+			newVars.add(Integer.valueOf(item));
+		}
+		return ctConceptoDao.getRegistros(newVars);
 	}
 	
 	@Override
