@@ -151,11 +151,13 @@ public class MenuPrincipalBean implements Serializable {
 				List<CtConcepto> listOfRecords = menuPrincipalBo.getTableNames(getSelectedVars());
 				if (listOfRecords.size() > 0) {
 					setRenderedRecords(true);
-					for (CtConcepto item : listOfRecords) {
-						log.debug("ID variable: " + item.getCtVariable().getIdVariable());
-						log.debug("Nombre tabla: " + item.getCtTabla().getDescTabla());
-					}
-					menuPrincipalBo.getDataFromTables(listOfRecords, fechaInicio, fechaFin);
+					List<DatosBasicos> listOfVO = menuPrincipalBo.getDataFromTables(listOfRecords, getFechaInicio(), getFechaFin());
+					setListOfRecords(listOfVO);
+				} else {
+					FacesContext.getCurrentInstance().addMessage(null, 
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", 
+									"No se encontró ningún registro con las variables solicitadas."));
+					return;
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,

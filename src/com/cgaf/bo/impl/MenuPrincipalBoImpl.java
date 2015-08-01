@@ -1,6 +1,7 @@
 package com.cgaf.bo.impl;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,14 +36,27 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	@Override
 	public List<DatosBasicos> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception {
 		log.debug("Inicia proceso de extraccion de informacion para ser presentada en el reporte.");
-		Timestamp fechaInicial = new Timestamp(fechaInicio.getTime());
-		Timestamp fechaFinal = new Timestamp(fechaFin.getTime());
-		List<HtGeneric> listOfResults = hqlUtilDao.executeQuery(listOfVars.get(0), fechaInicial, fechaFinal);
-		for (HtGeneric item : listOfResults) {
-			log.debug("Info 1: " + item.getIdPee() + " : " + item.getCtVariable().getIdVariable() 
-					+ " : " + item.getNumPeriodo() + " : " + item.getValValor());
+		long mili = 86399000l;
+		long _5min = 300000l;
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		String fechaInicial = format.format(fechaInicio);
+		String fechaFinal = format.format(new Date(fechaFin.getTime() + mili));
+		List<HtGeneric> listOfResults = new ArrayList<HtGeneric>();
+		for (CtConcepto item : listOfVars) {
+			listOfResults.addAll(hqlUtilDao.executeQuery(item, fechaInicial, fechaFinal));
 		}
-		return null;
+		log.debug("Total de registros obtenidos " + listOfResults.size());
+		List<DatosBasicos> listToReturn = new ArrayList<DatosBasicos>();
+		int i = 0;
+		for (HtGeneric item : listOfResults) {
+			DatosBasicos objToAdd = new DatosBasicos();
+			objToAdd.setId(++i);
+			objToAdd.setFechaIni(new Timestamp(item.getFechPeriodo().getTime()));
+			objToAdd.setFechaFin(new Timestamp(item.getFechPeriodo().getTime() + _5min));
+			
+			listToReturn.add(objToAdd);
+		}
+		return listToReturn;
 	}
 
 	@Override

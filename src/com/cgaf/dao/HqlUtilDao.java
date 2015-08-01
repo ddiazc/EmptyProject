@@ -1,6 +1,5 @@
 package com.cgaf.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import com.cgaf.model.CtConcepto;
@@ -20,6 +19,6 @@ public interface HqlUtilDao {
 	 * para el reporte.
 	 * 
 	 */
-	List<HtGeneric> executeQuery(CtConcepto object, Timestamp fechaIni, Timestamp fechaFin);
+	List<HtGeneric> executeQuery(CtConcepto object, String fechaIni, String fechaFin);
 
 }

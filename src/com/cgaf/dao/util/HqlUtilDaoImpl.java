@@ -1,51 +1,52 @@
 package com.cgaf.dao.util;
 
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.cgaf.dao.HqlUtilDao;
 import com.cgaf.model.CtConcepto;
+import com.cgaf.model.CtVariable;
 import com.cgaf.model.HtGeneric;
 
-public class HqlUtilDaoImpl extends HibernateDaoSupport implements HqlUtilDao {
+public class HqlUtilDaoImpl extends JdbcDaoSupport implements HqlUtilDao {
 	
 	private static final Logger log = Logger.getLogger(HqlUtilDaoImpl.class);
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
-	public List<HtGeneric> executeQuery(CtConcepto object, Timestamp fechaIni, Timestamp fechaFin) {
-		Session session = null;
-		String tabla;
-		if (object.getCtTabla().getDescTabla().equals("HT_CINCAMBIENTAL")) {
-			tabla = "HtCincambiental";
-		} else if (object.getCtTabla().getDescTabla().equals("HT_CINCCROMATOGRAFO")) {
-			tabla = "HtCinccromatografo";
-		} else if (object.getCtTabla().getDescTabla().equals("HT_CINCENERGIA")) {
-			tabla = "HtCincenergia";
-		} else {
-			tabla = "";
-		}
-		String query = "FROM " + tabla + " WHERE CtVariable.idVariable = " + object.getCtVariable().getIdVariable();
+	public List<HtGeneric> executeQuery(CtConcepto object, String fechaIni, String fechaFin) {
+		StringBuffer hql = new StringBuffer();
+		hql.append("SELECT ID_PEE ID, FECH_PERIODO FECHA, NUM_PERIODO NP, ");
+		hql.append("ID_VARIABLE VAR, VAL_VALOR VALOR, ID_VERSION VERSION FROM ");
+		hql.append(object.getCtTabla().getDescTabla());
+		hql.append(" WHERE ID_VARIABLE = ");
+		hql.append(object.getCtVariable().getIdVariable());
+		hql.append(" AND FECH_PERIODO BETWEEN TO_DATE ('");
+		hql.append(fechaIni);
+		hql.append("', 'dd/mm/yy hh24:mi:ss') and to_date('");
+		hql.append(fechaFin);
+		hql.append("', 'dd/mm/yy hh24:mi:ss')");
 		try {
-			session = this.getHibernateTemplate().getSessionFactory().openSession();
-			Query hql = session.createQuery(query);
-			List<HtGeneric> listOfResults = (List<HtGeneric>) hql.list();
-			log.debug(hql.toString());
-			if (listOfResults.size() > 0) {
-				log.info("Se obtuvieron " + listOfResults.size() + " registros de la tabla "
-						+ object.getCtTabla().getDescTabla() + " buscando la variable " 
-						+ object.getCtVariable().getIdVariable());
-			} else {
-				log.info("No se encontraron registros.");
+			List<HtGeneric> listOfGeneric = new ArrayList<HtGeneric>();
+			List<Map<String, Object>> rows = getJdbcTemplate().queryForList(hql.toString());
+			for (Map row : rows) {
+				HtGeneric genericObj = new HtGeneric();
+				genericObj.setIdPee(Integer.parseInt(row.get("ID").toString()));
+				genericObj.setFechPeriodo((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)row.get("Fecha").toString())));
+				genericObj.setNumPeriodo(Integer.parseInt(row.get("NP").toString()));
+				genericObj.setCtVariable(new CtVariable(Integer.parseInt(row.get("ID").toString()), ""));
+				genericObj.setValValor(Double.parseDouble(row.get("VALOR").toString()));
+				genericObj.setIdPee(row.get("VERSION") != null ? Integer.parseInt(row.get("VERSION").toString()) : 0);
+				listOfGeneric.add(genericObj);
 			}
-			return listOfResults;
-		} catch (HibernateException e) {
+			log.debug("Se obtivieron " + listOfGeneric.size() + " registros para la variable " + object.getCtVariable().getIdVariable());
+			return listOfGeneric;
+		} catch (Exception e) {
 			log.error("Ocurrio un error al realizar busqueda con HQL." , e);
 			return null;
 		}

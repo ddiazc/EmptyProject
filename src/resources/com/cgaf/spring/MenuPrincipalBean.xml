@@ -24,7 +24,6 @@
 	</bean>
 	
 	<bean name="hqlUtilDao" class="com.cgaf.dao.util.HqlUtilDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
     <bean name="fileManager" class="com.cgaf.util.excel.impl.FileManagerImpl"/>
