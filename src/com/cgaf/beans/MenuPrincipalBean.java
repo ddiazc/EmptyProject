@@ -151,6 +151,11 @@ public class MenuPrincipalBean implements Serializable {
 				List<CtConcepto> listOfRecords = menuPrincipalBo.getTableNames(getSelectedVars());
 				if (listOfRecords.size() > 0) {
 					setRenderedRecords(true);
+					for (CtConcepto item : listOfRecords) {
+						log.debug("ID variable: " + item.getCtVariable().getIdVariable());
+						log.debug("Nombre tabla: " + item.getCtTabla().getDescTabla());
+					}
+					menuPrincipalBo.getDataFromTables(listOfRecords, fechaInicio, fechaFin);
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,

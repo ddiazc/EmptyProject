@@ -1,10 +1,12 @@
 package com.cgaf.bo;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
+import com.cgaf.vo.DatosBasicos;
 
 /**
 *
@@ -72,5 +74,18 @@ public interface MenuPrincipalBo {
 	 * 
 	 */
 	List<CtConcepto> getTableNames(List<String> variables) throws Exception;
+	
+	/**
+	 * Metodo que procesa la informacion obtenida de la base de datos para acomodarla
+	 * en una lista de tipo View Object.
+	 *  
+	 * @param listOfVars Lista de objetos que contiene los IDs de variables asi como 
+	 * los nombres de las tablas donde debera ser buscada la informacion de las variables.
+	 * @return Devuelve una lista que contiene la informacion sobre cada variable y que sera
+	 * visualizada en el reporte..
+	 * @throws Exception
+	 * 
+	 */
+	List<DatosBasicos> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception;
 
 }

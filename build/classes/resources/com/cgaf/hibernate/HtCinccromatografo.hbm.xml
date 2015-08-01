@@ -8,7 +8,7 @@
             <column name="ID_PEE" precision="3" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="ctVariable" class="com.cgaf.model.CtVariable" fetch="select">
+        <many-to-one name="CtVariable" class="com.cgaf.model.CtVariable" fetch="select">
             <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
         </many-to-one>
         <property name="fechPeriodo" type="date">

@@ -1,15 +1,22 @@
 package com.cgaf.bo.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.dao.CtConceptoDao;
 import com.cgaf.dao.CtTablaDao;
 import com.cgaf.dao.CtVariableDao;
+import com.cgaf.dao.HqlUtilDao;
 import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipos;
 import com.cgaf.model.CtVariable;
+import com.cgaf.model.HtGeneric;
+import com.cgaf.vo.DatosBasicos;
 
 /**
 *
@@ -21,6 +28,22 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	CtTablaDao ctTablaDao;
 	CtVariableDao ctVariableDao;
 	CtConceptoDao ctConceptoDao;
+	HqlUtilDao hqlUtilDao;
+	
+	private static final Logger log = Logger.getLogger(MenuPrincipalBoImpl.class);
+	
+	@Override
+	public List<DatosBasicos> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception {
+		log.debug("Inicia proceso de extraccion de informacion para ser presentada en el reporte.");
+		Timestamp fechaInicial = new Timestamp(fechaInicio.getTime());
+		Timestamp fechaFinal = new Timestamp(fechaFin.getTime());
+		List<HtGeneric> listOfResults = hqlUtilDao.executeQuery(listOfVars.get(0), fechaInicial, fechaFinal);
+		for (HtGeneric item : listOfResults) {
+			log.debug("Info 1: " + item.getIdPee() + " : " + item.getCtVariable().getIdVariable() 
+					+ " : " + item.getNumPeriodo() + " : " + item.getValValor());
+		}
+		return null;
+	}
 
 	@Override
 	public List<CtTipos> getTipos() throws Exception {
@@ -188,6 +211,14 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 
 	public void setCtConceptoDao(CtConceptoDao ctConceptoDao) {
 		this.ctConceptoDao = ctConceptoDao;
+	}
+
+	public HqlUtilDao getHqlUtilDao() {
+		return hqlUtilDao;
+	}
+
+	public void setHqlUtilDao(HqlUtilDao hqlUtilDao) {
+		this.hqlUtilDao = hqlUtilDao;
 	}
 
 }
