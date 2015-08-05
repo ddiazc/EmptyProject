@@ -180,6 +180,7 @@ public class MenuPrincipalBean implements Serializable {
 	public void postProcessXLS(Object document) {
 		try {
 			HSSFWorkbook xlsDocument = (HSSFWorkbook) document;
+			fileManager.addRow(xlsDocument, menuPrincipalBo.getSecondSubHeaders());
 			fileManager.addRow(xlsDocument, menuPrincipalBo.getFirstSubHeaders());
 			fileManager.formatXLS(xlsDocument);
 			fileManager.styleCells(xlsDocument);

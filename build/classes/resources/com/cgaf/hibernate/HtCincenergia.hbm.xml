@@ -1,29 +1,32 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.HtCincenergia" table="HT_CINCENERGIA">
-        <id name="idPee" type="integer">
-            <column name="ID_PEE" precision="3" scale="0" />
+        <id name="idSecuencial" type="integer">
+            <column name="ID_SECUENCIAL" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
         <many-to-one name="CtVariable" class="com.cgaf.model.CtVariable" fetch="select">
-            <column name="ID_VARIABLE" precision="5" scale="0" not-null="true" />
+            <column name="ID_VARIABLE" precision="22" scale="0" not-null="true" />
         </many-to-one>
-        <property name="fechPeriodo" type="date">
-            <column name="FECH_PERIODO" length="7" not-null="true" />
+        <many-to-one name="CtProductores" class="com.cgaf.model.CtProductores" fetch="select">
+            <column name="ID_PEE" precision="3" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="fechPeriodo" type="timestamp">
+            <column name="FECH_PERIODO" not-null="true" />
         </property>
-        <property name="numPeriodo" type="long">
+        <property name="numPeriodo" type="integer">
             <column name="NUM_PERIODO" precision="10" scale="0" not-null="true" />
         </property>
         <property name="valValor" type="java.lang.Double">
             <column name="VAL_VALOR" precision="126" scale="0" />
         </property>
-        <property name="idVersion" type="java.lang.Long">
+        <property name="idVersion" type="integer">
             <column name="ID_VERSION" precision="10" scale="0" />
         </property>
-        <property name="idEstatus" type="big_decimal">
+        <property name="idEstatus" type="integer">
             <column name="ID_ESTATUS" precision="22" scale="0" />
         </property>
     </class>

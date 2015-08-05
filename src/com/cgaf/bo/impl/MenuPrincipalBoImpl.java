@@ -53,7 +53,60 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 			objToAdd.setId(++i);
 			objToAdd.setFechaIni(new Timestamp(item.getFechPeriodo().getTime()));
 			objToAdd.setFechaFin(new Timestamp(item.getFechPeriodo().getTime() + _5min));
-			
+			if (item.getCtVariable().getIdVariable().equals(200002002)) {
+				objToAdd.setTatm(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002003)) {
+				objToAdd.setHatm(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002004)) {
+				objToAdd.setPatm(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002010)) {
+				objToAdd.setEnLin1PrinEnt(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002011)) {
+				objToAdd.setEnLin1PrinSal(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002012)) {
+				objToAdd.setEnLin1RespEnt(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002013)) {
+				objToAdd.setEnLin1RespSal(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002014)) {
+				objToAdd.setEnLin2PrinEnt(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002015)) {
+				objToAdd.setEnLin2PrinSal(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002016)) {
+				objToAdd.setEnLin2RespEnt(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002017)) {
+				objToAdd.setEnLin2RespSal(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002018)) {
+				objToAdd.setpCIgas(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002019)) {
+				objToAdd.setpCSgas(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002020)) {
+				objToAdd.setDensGas(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002021)) {
+				objToAdd.setFactPot(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(200002023)) {
+				objToAdd.setEnLin1PrinEnt(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(280002006)) {
+				objToAdd.setPotenciaV(item.getValValor());
+			}
+			if (item.getCtVariable().getIdVariable().equals(280002006)) {
+				objToAdd.setPotenciaV(item.getValValor());
+			}	
 			listToReturn.add(objToAdd);
 		}
 		return listToReturn;

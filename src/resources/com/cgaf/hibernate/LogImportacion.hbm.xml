@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.LogImportacion" table="LOG_IMPORTACION">
+        <id name="idLog" type="integer">
+            <column name="ID_LOG" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO" length="60" />
+        </property>
+        <property name="fechaProceso" type="date">
+            <column name="FECHA_PROCESO" length="7" />
+        </property>
+        <property name="nombreProceso" type="string">
+            <column name="NOMBRE_PROCESO" length="20" />
+        </property>
+        <property name="fechaInicio" type="timestamp">
+            <column name="FECHA_INICIO" />
+        </property>
+        <property name="fechaFin" type="timestamp">
+            <column name="FECHA_FIN" />
+        </property>
+        <property name="regTransferidos" type="big_decimal">
+            <column name="REG_TRANSFERIDOS" precision="22" scale="0" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="20" />
+        </property>
+        <property name="comentarios" type="string">
+            <column name="COMENTARIOS" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

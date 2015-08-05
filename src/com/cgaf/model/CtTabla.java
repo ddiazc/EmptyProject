@@ -1,6 +1,6 @@
 package com.cgaf.model;
 
-// Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1
+// Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class CtTabla implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idTabla;
 	private String descTabla;
-	private Set<CtConcepto> ctConceptos = new HashSet<CtConcepto>(0);
+	private Set<CtConcepto> ctConcepto = new HashSet<CtConcepto>(0);
 
 	public CtTabla() {
 	}
@@ -26,10 +26,10 @@ public class CtTabla implements java.io.Serializable {
 		this.descTabla = descTabla;
 	}
 
-	public CtTabla(Integer idTabla, String descTabla, Set<CtConcepto> ctConceptos) {
+	public CtTabla(Integer idTabla, String descTabla, Set<CtConcepto> ctConcepto) {
 		this.idTabla = idTabla;
 		this.descTabla = descTabla;
-		this.ctConceptos = ctConceptos;
+		this.ctConcepto = ctConcepto;
 	}
 
 	public Integer getIdTabla() {
@@ -48,12 +48,12 @@ public class CtTabla implements java.io.Serializable {
 		this.descTabla = descTabla;
 	}
 
-	public Set<CtConcepto> getCtConceptos() {
-		return this.ctConceptos;
+	public Set<CtConcepto> getCtConcepto() {
+		return this.ctConcepto;
 	}
 
-	public void setCtConceptos(Set<CtConcepto> ctConceptos) {
-		this.ctConceptos = ctConceptos;
+	public void setCtConcepto(Set<CtConcepto> ctConcepto) {
+		this.ctConcepto = ctConcepto;
 	}
 
 }

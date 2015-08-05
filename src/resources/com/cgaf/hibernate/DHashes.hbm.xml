@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.DHashes" table="D_HASHES">
         <id name="idHash" type="integer">
@@ -14,7 +14,7 @@
             </column>
         </many-to-one>
         <property name="hash" type="string">
-            <column name="HASH" not-null="true">
+            <column name="HASH" length="100" not-null="true">
                 <comment>Hash del usuario.</comment>
             </column>
         </property>

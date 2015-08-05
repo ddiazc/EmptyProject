@@ -1,6 +1,6 @@
 package com.cgaf.model;
 
-// Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1
+// Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 
@@ -13,7 +13,7 @@ public class DtPlantillaId implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private short idPlantilla;
+	private Integer idPlantilla;
 	private Integer valRen;
 	private Integer valCol;
 	private String nomCelcol;
@@ -28,11 +28,11 @@ public class DtPlantillaId implements java.io.Serializable {
 	public DtPlantillaId() {
 	}
 
-	public DtPlantillaId(short idPlantilla) {
+	public DtPlantillaId(Integer idPlantilla) {
 		this.idPlantilla = idPlantilla;
 	}
 
-	public DtPlantillaId(short idPlantilla, Integer valRen, Integer valCol,
+	public DtPlantillaId(Integer idPlantilla, Integer valRen, Integer valCol,
 			String nomCelcol, String valTipo, String valCriterio, Byte valHoja,
 			String tipoDato, String nomHoja, BigDecimal idDtPlantilla,
 			String titulo) {
@@ -49,11 +49,11 @@ public class DtPlantillaId implements java.io.Serializable {
 		this.titulo = titulo;
 	}
 
-	public short getIdPlantilla() {
+	public Integer getIdPlantilla() {
 		return this.idPlantilla;
 	}
 
-	public void setIdPlantilla(short idPlantilla) {
+	public void setIdPlantilla(Integer idPlantilla) {
 		this.idPlantilla = idPlantilla;
 	}
 

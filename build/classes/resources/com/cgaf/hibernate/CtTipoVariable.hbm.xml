@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.CtTipoVariable" table="CT_TIPO_VARIABLE">
+        <id name="idTipoVariable" type="integer">
+            <column name="ID_TIPO_VARIABLE" precision="2" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descTipoVariable" type="string">
+            <column name="DESC_TIPO_VARIABLE" length="400" not-null="true" />
+        </property>
+        <set name="CtVariable" table="CT_VARIABLE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_TIPO_VARIABLE" precision="2" scale="0" />
+            </key>
+            <one-to-many class="com.cgaf.model.CtVariable" />
+        </set>
+    </class>
+</hibernate-mapping>

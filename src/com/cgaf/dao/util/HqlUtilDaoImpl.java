@@ -39,7 +39,7 @@ public class HqlUtilDaoImpl extends JdbcDaoSupport implements HqlUtilDao {
 				genericObj.setIdPee(Integer.parseInt(row.get("ID").toString()));
 				genericObj.setFechPeriodo((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)row.get("Fecha").toString())));
 				genericObj.setNumPeriodo(Integer.parseInt(row.get("NP").toString()));
-				genericObj.setCtVariable(new CtVariable(Integer.parseInt(row.get("ID").toString()), ""));
+				genericObj.setCtVariable(new CtVariable(Integer.parseInt(row.get("VAR").toString()), ""));
 				genericObj.setValValor(Double.parseDouble(row.get("VALOR").toString()));
 				genericObj.setIdPee(row.get("VERSION") != null ? Integer.parseInt(row.get("VERSION").toString()) : 0);
 				listOfGeneric.add(genericObj);

@@ -1,6 +1,6 @@
 package com.cgaf.model;
 
-// Generated 12-jul-2015 21:00:36 by Hibernate Tools 3.4.0.CR1
+// Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,9 +15,11 @@ public class CtVariable implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer idVariable;
+	private CtTipoVariable ctTipoVariable;
 	private String descVariable;
 	private String descUnidad;
 	private String descNemonico;
+	private String descVariableR;
 	private Set<HtCinccromatografo> htCinccromatografos = new HashSet<HtCinccromatografo>(
 			0);
 	private Set<HtCincestsuper> htCincestsupers = new HashSet<HtCincestsuper>(0);
@@ -37,17 +39,20 @@ public class CtVariable implements java.io.Serializable {
 		this.descVariable = descVariable;
 	}
 
-	public CtVariable(Integer idVariable, String descVariable, String descUnidad,
-			String descNemonico, Set<HtCinccromatografo> htCinccromatografos,
+	public CtVariable(Integer idVariable, CtTipoVariable ctTipoVariable,
+			String descVariable, String descUnidad, String descNemonico,
+			String descVariableR, Set<HtCinccromatografo> htCinccromatografos,
 			Set<HtCincestsuper> htCincestsupers,
 			Set<HtCincenergia> htCincenergias,
 			Set<HtCincderivada> htCincderivadas,
 			Set<HtCincambiental> htCincambientals, Set<CtConcepto> ctConceptos,
 			Set<HtCincenergiaRespaldo> htCincenergiaRespaldos) {
 		this.idVariable = idVariable;
+		this.ctTipoVariable = ctTipoVariable;
 		this.descVariable = descVariable;
 		this.descUnidad = descUnidad;
 		this.descNemonico = descNemonico;
+		this.descVariableR = descVariableR;
 		this.htCinccromatografos = htCinccromatografos;
 		this.htCincestsupers = htCincestsupers;
 		this.htCincenergias = htCincenergias;
@@ -63,6 +68,14 @@ public class CtVariable implements java.io.Serializable {
 
 	public void setIdVariable(Integer idVariable) {
 		this.idVariable = idVariable;
+	}
+
+	public CtTipoVariable getCtTipoVariable() {
+		return this.ctTipoVariable;
+	}
+
+	public void setCtTipoVariable(CtTipoVariable ctTipoVariable) {
+		this.ctTipoVariable = ctTipoVariable;
 	}
 
 	public String getDescVariable() {
@@ -87,6 +100,14 @@ public class CtVariable implements java.io.Serializable {
 
 	public void setDescNemonico(String descNemonico) {
 		this.descNemonico = descNemonico;
+	}
+
+	public String getDescVariableR() {
+		return this.descVariableR;
+	}
+
+	public void setDescVariableR(String descVariableR) {
+		this.descVariableR = descVariableR;
 	}
 
 	public Set<HtCinccromatografo> getHtCinccromatografos() {
