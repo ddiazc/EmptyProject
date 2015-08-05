@@ -64,7 +64,7 @@
                                 	<p:column style="width: auto;" colspan="2">
                                 		<p:panel id="tiposGrid" header="Tipos">
 	                                		<p:selectManyCheckbox id="gridTipo" value="#{menuP.selectedTipos}" layout="grid" columns="1">
-	                                			<f:selectItems value="#{menuP.tipos}" var="tipo" itemLabel="#{tipo.descTipo}" itemValue="#{tipo.idTipo}"/>
+	                                			<f:selectItems value="#{menuP.tipos}" var="tipo" itemLabel="#{tipo.descTipoVariable}" itemValue="#{tipo.idTipoVariable}"/>
 	                                			<p:ajax update="tiposGrid variablesGrid messages" listener="#{menuP.eligeTipo}" />
 	                                		</p:selectManyCheckbox>
                                 		</p:panel>

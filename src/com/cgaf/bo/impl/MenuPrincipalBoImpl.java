@@ -11,10 +11,11 @@ import org.apache.log4j.Logger;
 import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.dao.CtConceptoDao;
 import com.cgaf.dao.CtTablaDao;
+import com.cgaf.dao.CtTipoVariableDao;
 import com.cgaf.dao.CtVariableDao;
 import com.cgaf.dao.HqlUtilDao;
 import com.cgaf.model.CtConcepto;
-import com.cgaf.model.CtTipos;
+import com.cgaf.model.CtTipoVariable;
 import com.cgaf.model.CtVariable;
 import com.cgaf.model.HtGeneric;
 import com.cgaf.vo.DatosBasicos;
@@ -26,10 +27,11 @@ import com.cgaf.vo.DatosBasicos;
 
 public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	
+	HqlUtilDao hqlUtilDao;
 	CtTablaDao ctTablaDao;
 	CtVariableDao ctVariableDao;
 	CtConceptoDao ctConceptoDao;
-	HqlUtilDao hqlUtilDao;
+	CtTipoVariableDao ctTipoVariableDao;
 	
 	private static final Logger log = Logger.getLogger(MenuPrincipalBoImpl.class);
 	
@@ -113,12 +115,10 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	}
 
 	@Override
-	public List<CtTipos> getTipos() throws Exception {
-		List<CtTipos> tipos = new ArrayList<CtTipos>();
-        tipos.add(new CtTipos(1, "Todas"));
-        tipos.add(new CtTipos(2, "Ambientales"));
-        tipos.add(new CtTipos(3, "Cromatógrafos"));
-        tipos.add(new CtTipos(4, "Energía"));
+	public List<CtTipoVariable> getTipos() throws Exception {
+		List<CtTipoVariable> tipos = new ArrayList<CtTipoVariable>();
+		tipos.add(new CtTipoVariable(0, "Todas"));
+		tipos.addAll(ctTipoVariableDao.getTipos());
 		return tipos;
 	}
 
@@ -134,7 +134,7 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	public List<String> selectVariables(List<String> selectedTipos) throws Exception {
 		List<String> newSelectedVarList = new ArrayList<String>();
 		for (String item : selectedTipos) {
-			if (item.equals("1")) {
+			if (item.equals("0")) {
 				List<CtVariable> listOfVars = ctVariableDao.getVariables();
 				newSelectedVarList.add("1");
 				for (CtVariable variable : listOfVars) {
@@ -286,6 +286,14 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 
 	public void setHqlUtilDao(HqlUtilDao hqlUtilDao) {
 		this.hqlUtilDao = hqlUtilDao;
+	}
+
+	public CtTipoVariableDao getCtTipoVariableDao() {
+		return ctTipoVariableDao;
+	}
+
+	public void setCtTipoVariableDao(CtTipoVariableDao ctTipoVariableDao) {
+		this.ctTipoVariableDao = ctTipoVariableDao;
 	}
 
 }

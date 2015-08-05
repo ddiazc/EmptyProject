@@ -21,7 +21,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import com.cgaf.bo.MenuPrincipalBo;
 import com.cgaf.filters.Util;
 import com.cgaf.model.CtConcepto;
-import com.cgaf.model.CtTipos;
+import com.cgaf.model.CtTipoVariable;
 import com.cgaf.model.CtVariable;
 import com.cgaf.util.Validators;
 import com.cgaf.util.excel.FileManager;
@@ -50,7 +50,7 @@ public class MenuPrincipalBean implements Serializable {
 	private String messagePage;
 	private List<String> selectedTipos;
 	private List<String> selectedVars;
-	private List<CtTipos> tipos;
+	private List<CtTipoVariable> tipos;
 	private List<CtVariable> variables;
 	private List<DatosBasicos> listOfRecords;
 	private static final String FAILURE;
@@ -112,7 +112,7 @@ public class MenuPrincipalBean implements Serializable {
 		try {
 			setFileName("Reporte");
 			setRendered();
-			setHeaderDialogString("Process...");
+			setHeaderDialogString("Procesando...");
 			setMessagePage(FAILURE);
 			setRenderedOriginales(false);
 			setRenderedRecords(false);
@@ -227,9 +227,9 @@ public class MenuPrincipalBean implements Serializable {
 		try {
 			List<String> newSelectedTipo = new ArrayList<String>();
 			List<String> newSelectedVar = new ArrayList<String>();
-			if (getSelectedTipos().contains("1")) {
+			if (getSelectedTipos().contains("0")) {
 				for (int i = 0; i < getTipos().size(); i++) {
-					newSelectedTipo.add(getTipos().get(i).getIdTipo().toString());
+					newSelectedTipo.add(getTipos().get(i).getIdTipoVariable().toString());
 				}
 			} else {
 				newSelectedTipo.addAll(getSelectedTipos());
@@ -392,11 +392,11 @@ public class MenuPrincipalBean implements Serializable {
 		this.selectedVars = selectedVars;
 	}
 
-	public List<CtTipos> getTipos() {
+	public List<CtTipoVariable> getTipos() {
 		return tipos;
 	}
 
-	public void setTipos(List<CtTipos> tipos) {
+	public void setTipos(List<CtTipoVariable> tipos) {
 		this.tipos = tipos;
 	}
 

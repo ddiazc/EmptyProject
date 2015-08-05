@@ -9,6 +9,7 @@
         <property name="ctTablaDao" ref="ctTablaDao"></property>
         <property name="ctConceptoDao" ref="ctConceptoDao"></property>
         <property name="hqlUtilDao" ref="hqlUtilDao"></property>
+        <property name="ctTipoVariableDao" ref="ctTipoVariableDao"></property>
     </bean>
     
     <bean name="ctVariableDao" class="com.cgaf.dao.impl.CtVariableDaoImpl">
@@ -20,6 +21,10 @@
 	</bean>
 	
 	<bean name="ctConceptoDao" class="com.cgaf.dao.impl.CtConceptoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean name="ctTipoVariableDao" class="com.cgaf.dao.impl.CtTipoVariableDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

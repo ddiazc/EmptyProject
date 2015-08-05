@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.cgaf.model.CtConcepto;
-import com.cgaf.model.CtTipos;
+import com.cgaf.model.CtTipoVariable;
 import com.cgaf.model.CtVariable;
 import com.cgaf.vo.DatosBasicos;
 
@@ -23,7 +23,7 @@ public interface MenuPrincipalBo {
 	 * @throws Exception
 	 * 
 	 */
-	List<CtTipos> getTipos() throws Exception;
+	List<CtTipoVariable> getTipos() throws Exception;
 	
 	/**
 	 * Metodo que obtiene las variables.
