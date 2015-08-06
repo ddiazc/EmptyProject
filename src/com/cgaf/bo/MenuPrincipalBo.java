@@ -36,7 +36,7 @@ public interface MenuPrincipalBo {
 	List<CtVariable> getVariables() throws Exception;
 	
 	/**
-	 * Metodo que rellena selleciona variables segun el tipo seleccionado.
+	 * Metodo que seleciona variables segun el tipo seleccionado.
 	 * 
 	 * @param selectedTipos los tipos elegidos en el combobox.
 	 * @return Devuelve una lista de las variables elegidas.

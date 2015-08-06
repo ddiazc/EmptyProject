@@ -219,8 +219,7 @@ public class MenuPrincipalBean implements Serializable {
 	}
 	
 	/**
-	 * Metodo que se ejecuta cuando se eligen todas las opciones
-	 * de los tipos.
+	 * Metodo que se ejecuta cuando se elige un tipo de variable.
 	 * 
 	 */
 	public void eligeTipo() {
@@ -251,15 +250,8 @@ public class MenuPrincipalBean implements Serializable {
 	 */
 	public void eligeVar() {
 		try {
-			boolean todasFlag = false;
 			List<String> newSelectedVar = new ArrayList<String>();
-			for (int i = 0; i < getSelectedVars().size(); i++) {
-				if (getSelectedVars().get(i).equals("1")) {
-					todasFlag = true;
-					break;
-				}
-			}
-			if (todasFlag) {
+			if (getSelectedVars().contains("0")) {
 				for (int i = 0; i < getVariables().size(); i++) {
 					newSelectedVar.add(getVariables().get(i).getIdVariable().toString());
 				}

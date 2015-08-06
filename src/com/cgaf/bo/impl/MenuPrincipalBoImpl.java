@@ -125,7 +125,7 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	@Override
 	public List<CtVariable> getVariables() throws Exception {
 		List<CtVariable> variables = new ArrayList<CtVariable>();
-		variables.add(new CtVariable(1, "Todas"));
+		variables.add(new CtVariable(0, "Todas"));
 		variables.addAll(ctVariableDao.getVariables());
 		return variables;
 	}
@@ -133,29 +133,21 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	@Override
 	public List<String> selectVariables(List<String> selectedTipos) throws Exception {
 		List<String> newSelectedVarList = new ArrayList<String>();
-		for (String item : selectedTipos) {
-			if (item.equals("0")) {
-				List<CtVariable> listOfVars = ctVariableDao.getVariables();
-				newSelectedVarList.add("1");
-				for (CtVariable variable : listOfVars) {
-					newSelectedVarList.add(variable.getIdVariable().toString());
-				}
-				return newSelectedVarList;
+		if (selectedTipos.contains("0")) {
+			List<CtVariable> listOfVars = ctVariableDao.getVariables();
+			newSelectedVarList.add("0");
+			for (CtVariable variable : listOfVars) {
+				newSelectedVarList.add(variable.getIdVariable().toString());
 			}
-			if (item.equals("2")) {
-				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCAMBIENTAL");
-				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
-				newSelectedVarList.addAll(idsVariables);
+			return newSelectedVarList;
+		} else {
+			List<Integer> listOfTipos = new ArrayList<Integer>();
+			for (String item : selectedTipos) {
+				listOfTipos.add(Integer.parseInt(item));
 			}
-			if (item.equals("3")) {
-				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCCROMATOGRAFO");
-				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
-				newSelectedVarList.addAll(idsVariables);
-			}
-			if (item.equals("4")) {
-				Integer idTabla = ctTablaDao.getIdTabla("HT_CINCENERGIA");
-				List<String> idsVariables = ctConceptoDao.getIdVariables(idTabla);
-				newSelectedVarList.addAll(idsVariables);
+			List<CtVariable> listOfCtVars = ctVariableDao.getVariables(listOfTipos);
+			for (CtVariable item : listOfCtVars) {
+				newSelectedVarList.add(String.valueOf(item.getIdVariable()));
 			}
 		}
 		return newSelectedVarList;

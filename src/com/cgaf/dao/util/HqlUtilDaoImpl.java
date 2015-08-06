@@ -28,7 +28,7 @@ public class HqlUtilDaoImpl extends JdbcDaoSupport implements HqlUtilDao {
 		hql.append(object.getCtVariable().getIdVariable());
 		hql.append(" AND FECH_PERIODO BETWEEN TO_DATE ('");
 		hql.append(fechaIni);
-		hql.append("', 'dd/mm/yy hh24:mi:ss') and to_date('");
+		hql.append("', 'dd/mm/yy hh24:mi:ss') AND TO_DATE('");
 		hql.append(fechaFin);
 		hql.append("', 'dd/mm/yy hh24:mi:ss')");
 		try {
