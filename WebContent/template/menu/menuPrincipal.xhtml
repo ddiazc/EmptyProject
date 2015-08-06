@@ -106,7 +106,7 @@
                         </p:panel>
                         <p:panel id="reportePanel" styleClass="panelContent">
                         	<p:scrollPanel style="width:100%"  mode="native" rendered="#{menuP.renderedRecords}">
-                        		<p:dataTable id="records" var="list" value="#{menuP.listOfRecords}" tableStyle="width: auto" paginator="true" 
+                        		<p:dataTable id="records" var="list" value="#{menuP.listOfRegToView}" tableStyle="width: auto" paginator="true" 
 				    						 paginatorPosition="bottom" rows="20"
 				        					 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
 				        					 rowsPerPageTemplate="20,40,60,80,100"
@@ -128,106 +128,106 @@
 				        			<p:column rendered="true" headerText="Fecha de Fin del Periodo" sortBy="#{list.fechaFin}" style="width: auto">
 				        				<h:outputText value="#{list.fechaFin}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.carga}" headerText="Porcentaje de Carga" sortBy="#{list.carga}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.carga}" headerText="Porcentaje de Carga" sortBy="#{list.carga}" style="width: auto">
 				        				<h:outputText value="#{list.carga}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.cTUNGg}" headerText="Consumo Térmico Unitario Garantizado con gas" sortBy="#{list.ctungg}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.cTUNGg}" headerText="Consumo Térmico Unitario Garantizado con gas" sortBy="#{list.ctungg}" style="width: auto">
 				        				<h:outputText value="#{list.ctungg}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.cTOVg}" headerText="Consumo Térmico en Operacion en Vacío" sortBy="#{list.ctovg}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.cTOVg}" headerText="Consumo Térmico en Operacion en Vacío" sortBy="#{list.ctovg}" style="width: auto">
 				        				<h:outputText value="#{list.ctovg}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.tatm}" headerText="Temperatura Atmosférica" sortBy="#{list.tatm}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.tatm}" headerText="Temperatura Atmosférica" sortBy="#{list.tatm}" style="width: auto">
 				        				<h:outputText value="#{list.tatm}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.hatm}" headerText="Humedad Atmosférica" sortBy="#{list.hatm}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.hatm}" headerText="Humedad Atmosférica" sortBy="#{list.hatm}" style="width: auto">
 				        				<h:outputText value="#{list.hatm}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.patm}" headerText="Presion Atmosferica" sortBy="#{list.patm}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.patm}" headerText="Presion Atmosferica" sortBy="#{list.patm}" style="width: auto">
 				        				<h:outputText value="#{list.patm}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.cDDreal}" headerText="Capacidad Declarada Disponible a condiciones reales" sortBy="#{list.cDDreal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.cDDreal}" headerText="Capacidad Declarada Disponible a condiciones reales" sortBy="#{list.cDDreal}" style="width: auto">
 				        				<h:outputText value="#{list.cDDreal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.potenciaV}" headerText="Potencia Eléctrica a condiciones de verano" sortBy="#{list.potenciaV}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.potenciaV}" headerText="Potencia Eléctrica a condiciones de verano" sortBy="#{list.potenciaV}" style="width: auto">
 				        				<h:outputText value="#{list.potenciaV}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.potencia}" headerText="Potencia Eléctrica a condiciones reales" sortBy="#{list.potencia}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.potencia}" headerText="Potencia Eléctrica a condiciones reales" sortBy="#{list.potencia}" style="width: auto">
 				        				<h:outputText value="#{list.potencia}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enTotal}" headerText="Energía Eléctrica Total" sortBy="#{list.enTotal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enTotal}" headerText="Energía Eléctrica Total" sortBy="#{list.enTotal}" style="width: auto">
 				        				<h:outputText value="#{list.enTotal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enCinco}" headerText="Energía Eléctrica Cincominutal" sortBy="#{list.enCinco}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enCinco}" headerText="Energía Eléctrica Cincominutal" sortBy="#{list.enCinco}" style="width: auto">
 				        				<h:outputText value="#{list.enCinco}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1PrinEnt}" headerText="Energía Medidor Eléctrico: Línea 1 Principal Entrando" sortBy="#{list.enLin1PrinEnt}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1PrinEnt}" headerText="Energía Medidor Eléctrico: Línea 1 Principal Entrando" sortBy="#{list.enLin1PrinEnt}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1PrinEnt}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1PrinSal}" headerText="Energía Medidor Eléctrico: Línea 1 Principal Saliendo" sortBy="#{list.enLin1PrinSal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1PrinSal}" headerText="Energía Medidor Eléctrico: Línea 1 Principal Saliendo" sortBy="#{list.enLin1PrinSal}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1PrinSal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1RespEnt}" headerText="EnergÍa Medidor Eléctrico: Línea 1 Respaldo Entrando" sortBy="#{list.enLin1RespEnt}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1RespEnt}" headerText="EnergÍa Medidor Eléctrico: Línea 1 Respaldo Entrando" sortBy="#{list.enLin1RespEnt}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1RespEnt}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1RespSal}" headerText="Energía Medidor Eléctrico: Línea 1 Respaldo Saliendo" sortBy="#{list.enLin1RespSal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1RespSal}" headerText="Energía Medidor Eléctrico: Línea 1 Respaldo Saliendo" sortBy="#{list.enLin1RespSal}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1RespSal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2PrinEnt}" headerText="Energía Medidor Eléctrico: Línea 2 Principal Entrando" sortBy="#{list.enLin2PrinEnt}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2PrinEnt}" headerText="Energía Medidor Eléctrico: Línea 2 Principal Entrando" sortBy="#{list.enLin2PrinEnt}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2PrinEnt}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2PrinSal}" headerText="Energía Medidor Eléctrico: Línea 2 Principal Saliendo" sortBy="#{list.enLin2PrinSal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2PrinSal}" headerText="Energía Medidor Eléctrico: Línea 2 Principal Saliendo" sortBy="#{list.enLin2PrinSal}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2PrinSal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2RespEnt}" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Entrando" sortBy="#{list.enLin2RespEnt}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2RespEnt}" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Entrando" sortBy="#{list.enLin2RespEnt}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2RespEnt}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2RespSal}" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Saliendo" sortBy="#{list.enLin2RespSal}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2RespSal}" headerText="Energía Medidor Eléctrico: Línea 2 Respaldo Saliendo" sortBy="#{list.enLin2RespSal}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2RespSal}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.pCIgas}" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgas}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.pCIgas}" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgas}" style="width: auto">
 				        				<h:outputText value="#{list.pCIgas}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.pCSgas}" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgas}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.pCSgas}" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgas}" style="width: auto">
 				        				<h:outputText value="#{list.pCSgas}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.densGas}" headerText="Densidad Relativa del Gas en la Central" sortBy="#{list.densGas}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.densGas}" headerText="Densidad Relativa del Gas en la Central" sortBy="#{list.densGas}" style="width: auto">
 				        				<h:outputText value="#{list.densGas}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.factPot}" headerText="Factor de potencia de la central" sortBy="#{list.factPot}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.factPot}" headerText="Factor de potencia de la central" sortBy="#{list.factPot}" style="width: auto">
 				        				<h:outputText value="#{list.factPot}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.presCond}" headerText="Presión de vacío en el condensador" sortBy="#{list.presCond}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.presCond}" headerText="Presión de vacío en el condensador" sortBy="#{list.presCond}" style="width: auto">
 				        				<h:outputText value="#{list.presCond}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1PrinReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 1" sortBy="#{list.enLin1PrinReacQ1}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1PrinReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 1" sortBy="#{list.enLin1PrinReacQ1}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1PrinReacQ1}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1PrinReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 4" sortBy="#{list.enLin1PrinReacQ4}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1PrinReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 1 Principal Cuadrante 4" sortBy="#{list.enLin1PrinReacQ4}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1PrinReacQ4}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1RespReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 1" sortBy="#{list.enLin1RespReacQ1}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1RespReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 1" sortBy="#{list.enLin1RespReacQ1}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1RespReacQ1}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin1RespReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 4" sortBy="#{list.enLin1RespReacQ4}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin1RespReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 1 Respaldo Cuadrante 4" sortBy="#{list.enLin1RespReacQ4}" style="width: auto">
 				        				<h:outputText value="#{list.enLin1RespReacQ4}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2PrinReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 1" sortBy="#{list.enLin2PrinReacQ1}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2PrinReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 1" sortBy="#{list.enLin2PrinReacQ1}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2PrinReacQ1}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2PrinReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 4" sortBy="#{list.enLin2PrinReacQ4}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2PrinReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 2 Principal Cuadrante 4" sortBy="#{list.enLin2PrinReacQ4}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2PrinReacQ4}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2RespReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 1" sortBy="#{list.enLin2RespReacQ1}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2RespReacQ1}" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 1" sortBy="#{list.enLin2RespReacQ1}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2RespReacQ1}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.enLin2RespReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 4" sortBy="#{list.enLin2RespReacQ4}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.enLin2RespReacQ4}" headerText="Reactivos Medidor Eléctrico: Línea 2 Respaldo Cuadrante 4" sortBy="#{list.enLin2RespReacQ4}" style="width: auto">
 				        				<h:outputText value="#{list.enLin2RespReacQ4}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.pCIgasM3}" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgasM3}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.pCIgasM3}" headerText="Poder Calorífico Inferior del Gas en la Central" sortBy="#{list.pCIgasM3}" style="width: auto">
 				        				<h:outputText value="#{list.pCIgasM3}" style="width: auto" />
 				        			</p:column>
-				        			<p:column rendered="#{menuP.pCSgasM3}" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgasM3}" style="width: auto">
+				        			<p:column rendered="#{renderedFields.pCSgasM3}" headerText="Poder Calorífico Superior del Gas en la Central" sortBy="#{list.pCSgasM3}" style="width: auto">
 				        				<h:outputText value="#{list.pCSgasM3}" style="width: auto" />
 				        			</p:column>
 				        		</p:dataTable>

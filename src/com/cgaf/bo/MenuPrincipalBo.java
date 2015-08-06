@@ -6,7 +6,7 @@ import java.util.List;
 import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipoVariable;
 import com.cgaf.model.CtVariable;
-import com.cgaf.vo.DatosBasicos;
+import com.cgaf.vo.DatosBasicosValues;
 
 /**
 *
@@ -86,6 +86,6 @@ public interface MenuPrincipalBo {
 	 * @throws Exception
 	 * 
 	 */
-	List<DatosBasicos> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception;
+	List<DatosBasicosValues> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception;
 
 }

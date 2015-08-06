@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 * @author Franck RVX
 */
 
-public class DatosBasicos {
+public class DatosBasicosValues {
 	
 	private int id;
 	private Timestamp fechaIni;
@@ -47,61 +47,6 @@ public class DatosBasicos {
 	private double pCIgasM3;
 	private double pCSgasM3;
 	
-	public DatosBasicos() {
-		super();
-	}
-	public DatosBasicos(int id, Timestamp fechaIni, Timestamp fechaFin,
-			double carga, double ctungg, double ctovg, double tatm,
-			double hatm, double patm, double cDDreal, double potenciaV,
-			double potencia, double enTotal, double enCinco,
-			double enLin1PrinEnt, double enLin1PrinSal, double enLin1RespEnt,
-			double enLin1RespSal, double enLin2PrinEnt, double enLin2PrinSal,
-			double enLin2RespEnt, double enLin2RespSal, double pCIgas,
-			double pCSgas, double densGas, double factPot, double presCond,
-			double enLin1PrinReacQ1, double enLin1PrinReacQ4,
-			double enLin1RespReacQ1, double enLin1RespReacQ4,
-			double enLin2PrinReacQ1, double enLin2PrinReacQ4,
-			double enLin2RespReacQ1, double enLin2RespReacQ4, double pCIgasM3,
-			double pCSgasM3) {
-		super();
-		this.id = id;
-		this.fechaIni = fechaIni;
-		this.fechaFin = fechaFin;
-		this.carga = carga;
-		this.ctungg = ctungg;
-		this.ctovg = ctovg;
-		this.tatm = tatm;
-		this.hatm = hatm;
-		this.patm = patm;
-		this.cDDreal = cDDreal;
-		this.potenciaV = potenciaV;
-		this.potencia = potencia;
-		this.enTotal = enTotal;
-		this.enCinco = enCinco;
-		this.enLin1PrinEnt = enLin1PrinEnt;
-		this.enLin1PrinSal = enLin1PrinSal;
-		this.enLin1RespEnt = enLin1RespEnt;
-		this.enLin1RespSal = enLin1RespSal;
-		this.enLin2PrinEnt = enLin2PrinEnt;
-		this.enLin2PrinSal = enLin2PrinSal;
-		this.enLin2RespEnt = enLin2RespEnt;
-		this.enLin2RespSal = enLin2RespSal;
-		this.pCIgas = pCIgas;
-		this.pCSgas = pCSgas;
-		this.densGas = densGas;
-		this.factPot = factPot;
-		this.presCond = presCond;
-		this.enLin1PrinReacQ1 = enLin1PrinReacQ1;
-		this.enLin1PrinReacQ4 = enLin1PrinReacQ4;
-		this.enLin1RespReacQ1 = enLin1RespReacQ1;
-		this.enLin1RespReacQ4 = enLin1RespReacQ4;
-		this.enLin2PrinReacQ1 = enLin2PrinReacQ1;
-		this.enLin2PrinReacQ4 = enLin2PrinReacQ4;
-		this.enLin2RespReacQ1 = enLin2RespReacQ1;
-		this.enLin2RespReacQ4 = enLin2RespReacQ4;
-		this.pCIgasM3 = pCIgasM3;
-		this.pCSgasM3 = pCSgasM3;
-	}
 	public int getId() {
 		return id;
 	}

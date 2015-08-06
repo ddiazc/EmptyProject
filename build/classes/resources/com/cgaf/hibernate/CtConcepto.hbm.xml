@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 05-ago-2015 22:35:05 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.cgaf.model.CtConcepto" table="CT_CONCEPTO">
-        <id name="idPee" type="integer">
-            <column name="ID_PEE" precision="3" scale="0" />
+        <id name="idSecuencial" type="integer">
+            <column name="ID_SECUENCIAL" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
         <many-to-one name="CtVariable" class="com.cgaf.model.CtVariable" fetch="select">
             <column name="ID_VARIABLE" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="CtProductores" class="com.cgaf.model.CtProductores" fetch="select">
+            <column name="ID_PEE" precision="3" scale="0" not-null="true" />
         </many-to-one>
         <many-to-one name="CtTabla" class="com.cgaf.model.CtTabla" fetch="select">
             <column name="ID_TABLA" precision="5" scale="0" not-null="true" />

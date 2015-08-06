@@ -1,6 +1,6 @@
 package com.cgaf.model;
 
-// Generated 04-ago-2015 22:38:37 by Hibernate Tools 3.4.0.CR1
+// Generated 05-ago-2015 22:35:05 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;

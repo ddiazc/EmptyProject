@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-ago-2015 22:35:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.cgaf.model.CtTipoAcumulado" table="CT_TIPO_ACUMULADO">
+        <id name="idTipoAcumulado" type="integer">
+            <column name="ID_TIPO_ACUMULADO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="descTipoAcumulado" type="string">
+            <column name="DESC_TIPO_ACUMULADO" length="50" />
+        </property>
+        <set name="CtAcumulado" table="CT_ACUMULADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_TIPO_ACUMULADO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.cgaf.model.CtAcumulado" />
+        </set>
+    </class>
+</hibernate-mapping>

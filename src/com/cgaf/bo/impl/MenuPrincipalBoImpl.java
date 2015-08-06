@@ -18,7 +18,7 @@ import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtTipoVariable;
 import com.cgaf.model.CtVariable;
 import com.cgaf.model.HtGeneric;
-import com.cgaf.vo.DatosBasicos;
+import com.cgaf.vo.DatosBasicosValues;
 
 /**
 *
@@ -36,7 +36,7 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 	private static final Logger log = Logger.getLogger(MenuPrincipalBoImpl.class);
 	
 	@Override
-	public List<DatosBasicos> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception {
+	public List<DatosBasicosValues> getDataFromTables(List<CtConcepto> listOfVars, Date fechaInicio, Date fechaFin) throws Exception {
 		log.debug("Inicia proceso de extraccion de informacion para ser presentada en el reporte.");
 		long mili = 86399000l;
 		long _5min = 300000l;
@@ -48,10 +48,10 @@ public class MenuPrincipalBoImpl implements MenuPrincipalBo {
 			listOfResults.addAll(hqlUtilDao.executeQuery(item, fechaInicial, fechaFinal));
 		}
 		log.debug("Total de registros obtenidos " + listOfResults.size());
-		List<DatosBasicos> listToReturn = new ArrayList<DatosBasicos>();
+		List<DatosBasicosValues> listToReturn = new ArrayList<DatosBasicosValues>();
 		int i = 0;
 		for (HtGeneric item : listOfResults) {
-			DatosBasicos objToAdd = new DatosBasicos();
+			DatosBasicosValues objToAdd = new DatosBasicosValues();
 			objToAdd.setId(++i);
 			objToAdd.setFechaIni(new Timestamp(item.getFechPeriodo().getTime()));
 			objToAdd.setFechaFin(new Timestamp(item.getFechPeriodo().getTime() + _5min));
