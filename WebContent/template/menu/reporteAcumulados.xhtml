@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<h:outputStylesheet library="css" name="default.css" />
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>CGAF - Menú</title>
+		</f:facet>
+		<style>
+			.panelContent {
+				border: none;
+			}
+			
+			.contentGrid tr, .contentGrid td {
+				border: hidden;
+				border-style: hidden !important;
+			}
+		</style>
+	</h:head>
+	<h:body>
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()"
+			onerror="PF('statusDialog').hide()"
+			oncomplete="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="true"
+			header="#{acumuladosBean.headerDialogString}">
+			<p:graphicImage name="design/ajaxloadingbar.gif" />
+		</p:dialog>
+
+		<p:layout fullPage="true">
+			<p:layoutUnit style="border: none;" position="north" size="auto"
+				resizable="false" closable="true" collapsible="false">
+				<p:graphicImage name="img/falcon.png" alt="Imagen no disponible" />
+			</p:layoutUnit>
+
+			<p:layoutUnit style="border: none;" position="south" size="auto"
+				resizable="false" closable="true" collapsible="false">
+				<p:graphicImage name="img/valle_hermoso.png"
+					alt="Imagen no disponible" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+				<h:form id="content">
+
+	
+					<p:panel id="queryGrid" styleClass="panelContent" header="Búsqueda">
+						<p:panelGrid rendered="#{acumuladosBean.renderedOriginales}"
+							style="margin-bottom:10px; width: auto;" styleClass="contentGrid">
+
+							
+							<p:row>
+								<p:column style="width: auto;" colspan="2">
+									<p:panel id="tiposGrid" header="Tipos">
+										<p:selectManyCheckbox id="gridTipo"
+											value="#{acumuladosBean.selectedTipos}" layout="grid" columns="1">
+											<f:selectItems value="#{acumuladosBean.tipos}" var="tipo"
+												itemLabel="#{tipo.descTipoVariable}"
+												itemValue="#{tipo.idTipoVariable}" />
+											<p:ajax update="tiposGrid variablesGrid messages"
+												listener="#{acumuladosBean.eligeTipo}" />
+										</p:selectManyCheckbox>
+									</p:panel>
+								</p:column>
+								<p:column style="width: auto;" colspan="2">
+									<p:scrollPanel id="variablesGrid" mode="native"
+										style="width:350px; height:200px">
+										<p:panel header="Variables" styleClass="panelContent">
+											<p:selectManyCheckbox id="gridVar"
+													value="#{acumuladosBean.selectedVars}" layout="grid" columns="1">
+												<f:selectItems value="#{acumuladosBean.variables}" var="vars"
+													itemLabel="#{vars.descVariable}"
+													itemValue="#{vars.idVariable}" />
+												<p:ajax update="variablesGrid messages"
+													listener="#{acumuladosBean.eligeVar}" />
+											</p:selectManyCheckbox>
+										</p:panel>
+									</p:scrollPanel>
+								</p:column>
+
+								<p:column style="width: auto;" colspan="2">
+									<p:panel id="panelTipoAcum" header="Tipo Acumulado" styleClass="pannelContent">
+										<p:selectManyCheckbox id="gridTipAcum"
+												value="#{acumuladosBean.selectedTipoAcum}" layout="grid" columns="1" converter="javax.faces.Integer">
+											<f:selectItem itemValue="0" itemLabel="Todas"/>
+											<f:selectItems value="#{acumuladosBean.listTipoAcum}" var="tipAcum"
+													itemLabel="#{tipAcum.descTipoAcumulado}"
+													itemValue="#{tipAcum.idTipoAcumulado}"/>
+											<p:ajax update="panelTipoAcum panelAcum messages"
+													listener="#{acumuladosBean.eligeTipoAcum}"/>
+										</p:selectManyCheckbox>
+									</p:panel>
+								</p:column>
+								<p:column style="width: auto;" colspan="2">
+									<p:scrollPanel id="panelAcum" mode="native"
+											style="width:350px; height:200px">
+										<p:panel header="Acumulado" styleClass="panelContent">
+											<p:selectManyCheckbox id="gridAcum"
+													value="#{acumuladosBean.selectedAcum}" layout="grid" columns="1" converter="javax.faces.Integer">
+												<f:selectItem itemValue="0" itemLabel="Todas"/>
+												<f:selectItems value="#{acumuladosBean.listAcumulado}" var="acum"
+														itemLabel="#{acum.descAcumulado}"
+														itemValue="#{acum.idAcumulado}"/>
+												<p:ajax update="panelAcum messages"
+														listener="#{acumuladosBean.eligeAcum()}"/>
+											</p:selectManyCheckbox>
+										</p:panel>
+									</p:scrollPanel>
+								</p:column>
+
+							</p:row>
+							<p:row>
+								<p:column style="width: auto;" colspan="2">
+									<p:calendar id="restrictedInicio" value="#{acumuladosBean.fechaInicio}" label="Fecha inicio" placeholder="Fecha inicio" />
+								</p:column>
+								<p:column style="width: auto;" colspan="2">
+									<p:calendar id="restrictedFin" value="#{acumuladosBean.fechaFin}" label="Fecha inicio" placeholder="Fecha fin" />
+								</p:column>
+							</p:row>
+							<p:row>
+								
+								<p:column style="width: auto;">
+									<p:commandButton actionListener="#{acumuladosBean.getReporte}"
+										update="messagePanel " icon="ui-icon-search"
+										value="Buscar" />
+								</p:column>
+								<p:column style="width: auto;">
+									<p:commandButton actionListener="#{acumuladosBean.limpiar}"
+										update="messagePanel queryGrid "
+										icon=" ui-icon-trash" value="Limpiar" />
+								</p:column>
+								
+								
+							</p:row>
+							
+						</p:panelGrid>
+	
+					</p:panel>
+					<p:panel id="messagePanel" styleClass="panelContent">
+					<p:messages id="messages" showSummary="false" showDetail="true" 
+							autoUpdate="false" closable="true" />
+					</p:panel>
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</f:view>
+</html>
