@@ -14,5 +14,11 @@
         <property name="descAcumulado" type="string">
             <column name="DESC_ACUMULADO" length="50" />
         </property>
+        <property name="funcionAcumulado" type="string">
+            <column name="FUNCION_ACUMULADO" length="3" />
+        </property>
+        <property name="formatoAgrupacionAcumulado" type="string">
+            <column name="FORMATO_AGRUPACION_ACUMULADO" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

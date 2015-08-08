@@ -2,6 +2,7 @@ package com.cgaf.dao.util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,9 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.cgaf.dao.HqlUtilDao;
+import com.cgaf.model.CtAcumulado;
 import com.cgaf.model.CtConcepto;
 import com.cgaf.model.CtVariable;
 import com.cgaf.model.HtGeneric;
+import com.cgaf.util.FuncionesUtil;
 
 public class HqlUtilDaoImpl extends JdbcDaoSupport implements HqlUtilDao {
 	
@@ -50,6 +53,53 @@ public class HqlUtilDaoImpl extends JdbcDaoSupport implements HqlUtilDao {
 			log.error("Ocurrio un error al realizar busqueda con HQL." , e);
 			return null;
 		}
+	}
+	
+	@Override
+	public List<Map<String, Object>> getReporteAcumulado(List<CtConcepto> listConceptos, CtAcumulado acumulado,
+			Date fechaInicio, Date fechaFin) {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		String formatoAcum = acumulado.getFormatoAgrupacionAcumulado();
+		
+		String selectQuery = "select TO_CHAR(t0.FECH_PERIODO, '" + formatoAcum + "') \"Fecha inicio\"";
+		String fromQuery = " from ";
+		String whereQuery = " where ";
+		String groupQuery = " group by TO_CHAR(t0.FECH_PERIODO, '" + acumulado.getFormatoAgrupacionAcumulado() + "')"
+				+ " order by TO_CHAR(t0.FECH_PERIODO, '" + acumulado.getFormatoAgrupacionAcumulado() + "')";
+		String queryString;
+
+		String funcion = acumulado.getFuncionAcumulado();
+		CtConcepto concepto;
+		
+		for (int i = 0; i < listConceptos.size(); i++) {
+			concepto = listConceptos.get(i);
+			
+			selectQuery += ", " + funcion + "(t" + i + ".VAL_VALOR) \"" + concepto.getCtVariable().getIdVariable() + "\"";
+			if (i==0) {
+				fromQuery += concepto.getCtTabla().getDescTabla() + " t" + i;
+				whereQuery += " t" + i + ".ID_VARIABLE = " + concepto.getCtVariable().getIdVariable();
+			} else {
+				fromQuery += " join " + concepto.getCtTabla().getDescTabla() + " t" + i
+						+ " on t" + (i-1) + ".FECH_PERIODO = t" + i + ".FECH_PERIODO";
+				whereQuery += " and t" + i + ".ID_VARIABLE = " + concepto.getCtVariable().getIdVariable();
+			}
+		}
+		
+		whereQuery += " and trunc(t1.FECH_PERIODO) BETWEEN '";
+		if (formatoAcum.equals("yyyy/mm")) {
+			whereQuery += format.format(FuncionesUtil.getFirstDayMonth(fechaInicio));
+		} else if (formatoAcum.equals("yyyy")) {
+			whereQuery += format.format(FuncionesUtil.getFirstDayYear(fechaInicio));
+		} else {
+			whereQuery += format.format(fechaInicio);
+		}
+		whereQuery += "' and '" + format.format(fechaFin) + "'";
+		
+		queryString = selectQuery + fromQuery + whereQuery + groupQuery;
+		log.debug(queryString);
+
+		List<Map<String, Object>> rows = getJdbcTemplate().queryForList(queryString);
+		return rows;
 	}
 	
 }

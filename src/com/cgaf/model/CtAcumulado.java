@@ -16,6 +16,8 @@ public class CtAcumulado implements java.io.Serializable {
 	private Integer idAcumulado;
 	private CtTipoAcumulado ctTipoAcumulado;
 	private String descAcumulado;
+	private String funcionAcumulado;
+	private String formatoAgrupacionAcumulado;
 
 	public CtAcumulado() {
 	}
@@ -25,15 +27,18 @@ public class CtAcumulado implements java.io.Serializable {
 		this.ctTipoAcumulado = ctTipoAcumulado;
 	}
 
-	public CtAcumulado(Integer idAcumulado, CtTipoAcumulado ctTipoAcumulado,
-			String descAcumulado) {
+	public CtAcumulado(Integer idAcumulado, CtTipoAcumulado ctTipoAcumulado, String descAcumulado,
+			String funcionAcumulado, String formatoAgrupacionAcumulado) {
+		super();
 		this.idAcumulado = idAcumulado;
 		this.ctTipoAcumulado = ctTipoAcumulado;
 		this.descAcumulado = descAcumulado;
+		this.funcionAcumulado = funcionAcumulado;
+		this.formatoAgrupacionAcumulado = formatoAgrupacionAcumulado;
 	}
 
 	public Integer getIdAcumulado() {
-		return this.idAcumulado;
+		return idAcumulado;
 	}
 
 	public void setIdAcumulado(Integer idAcumulado) {
@@ -41,7 +46,7 @@ public class CtAcumulado implements java.io.Serializable {
 	}
 
 	public CtTipoAcumulado getCtTipoAcumulado() {
-		return this.ctTipoAcumulado;
+		return ctTipoAcumulado;
 	}
 
 	public void setCtTipoAcumulado(CtTipoAcumulado ctTipoAcumulado) {
@@ -49,11 +54,26 @@ public class CtAcumulado implements java.io.Serializable {
 	}
 
 	public String getDescAcumulado() {
-		return this.descAcumulado;
+		return descAcumulado;
 	}
 
 	public void setDescAcumulado(String descAcumulado) {
 		this.descAcumulado = descAcumulado;
 	}
 
+	public String getFuncionAcumulado() {
+		return funcionAcumulado;
+	}
+
+	public void setFuncionAcumulado(String funcionAcumulado) {
+		this.funcionAcumulado = funcionAcumulado;
+	}
+
+	public String getFormatoAgrupacionAcumulado() {
+		return formatoAgrupacionAcumulado;
+	}
+
+	public void setFormatoAgrupacionAcumulado(String formatoAgrupacionAcumulado) {
+		this.formatoAgrupacionAcumulado = formatoAgrupacionAcumulado;
+	}
 }

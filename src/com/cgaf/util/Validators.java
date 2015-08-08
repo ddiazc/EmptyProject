@@ -59,5 +59,16 @@ public class Validators {
 			return response;
 		}
 	}
+	
+	public static Map<Boolean, String> validaCombos(List<Integer> selectedValues, String nombre) {
+		Map<Boolean, String> response = new HashMap<Boolean, String>();
+		if (selectedValues.isEmpty()) {
+			response.put(false, "Debe seleccionar al menos un valor de la lista " + nombre + ".");
+			return response;
+		} else {
+			response.put(true, "");
+			return response;
+		}
+	}
 
 }

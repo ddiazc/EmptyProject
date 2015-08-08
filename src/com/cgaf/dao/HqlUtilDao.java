@@ -1,7 +1,10 @@
 package com.cgaf.dao;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.cgaf.model.CtAcumulado;
 import com.cgaf.model.CtConcepto;
 import com.cgaf.model.HtGeneric;
 
@@ -20,5 +23,8 @@ public interface HqlUtilDao {
 	 * 
 	 */
 	List<HtGeneric> executeQuery(CtConcepto object, String fechaIni, String fechaFin);
+	
+	List<Map<String, Object>> getReporteAcumulado(List<CtConcepto> listConceptos, CtAcumulado acumulado, Date fechaInicio,
+			Date fechaFin);
 
 }

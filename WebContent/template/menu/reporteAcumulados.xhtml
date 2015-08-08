@@ -143,9 +143,27 @@
 						</p:panelGrid>
 	
 					</p:panel>
-					<p:panel id="messagePanel" styleClass="panelContent">
+					<p:panel id="messagePanel" styleClass="panelContent"  >
 					<p:messages id="messages" showSummary="false" showDetail="true" 
-							autoUpdate="false" closable="true" />
+							autoUpdate="false" closable="true"/>
+
+						<p:dataTable value="#{acumuladosBean.records.rows}"
+								var="item"
+								rendered="#{acumuladosBean.renderedRecords}"
+								scrollable="true"
+								scrollWidth="99%"
+								scrollHeight="200"
+								paginator="true"
+								rows="20">
+							<p:columns 
+								value="#{acumuladosBean.records.encabezados}"
+							 	var="columnName" columnIndexVar="i"
+							 	width="200">
+							<f:facet name="header">#{columnName}</f:facet>
+								#{item[i]}
+							</p:columns>
+						</p:dataTable>
+
 					</p:panel>
 				</h:form>
 			</p:layoutUnit>

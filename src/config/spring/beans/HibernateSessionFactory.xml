@@ -25,6 +25,8 @@
                 <value>resources/com/cgaf/hibernate/CtTipoVariable.hbm.xml</value>
                 <value>resources/com/cgaf/hibernate/CtUsuarios.hbm.xml</value>
                 <value>resources/com/cgaf/hibernate/CtVariable.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtTipoAcumulado.hbm.xml</value>
+                <value>resources/com/cgaf/hibernate/CtAcumulado.hbm.xml</value>
                 <value>resources/com/cgaf/hibernate/DHashes.hbm.xml</value>
                 <value>resources/com/cgaf/hibernate/DtPlantilla.hbm.xml</value>
                 <value>resources/com/cgaf/hibernate/HtCincambiental.hbm.xml</value>

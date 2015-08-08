@@ -18,7 +18,9 @@ public class CtVariableDaoImpl extends HibernateDaoSupport implements CtVariable
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CtVariable> getVariables() throws Exception {
-		List<CtVariable> listOfVariables = getHibernateTemplate().find("FROM CtVariable");
+		String queryString = "SELECT a FROM CtVariable a"
+				+ " JOIN FETCH a.CtTipoVariable";
+		List<CtVariable> listOfVariables = getHibernateTemplate().find(queryString);
 		log.info("Se encontraron " + listOfVariables.size() + " registros en la tabla CT_VARIABLE.");
 		return listOfVariables;
 	}
